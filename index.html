@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixoraCine — Stream Movies & TV Shows</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR WITH GENRE DROPDOWN & PREDICTIVE SEARCH -->
+  <header id="navbar">
+    <div class="nav-left">
+      <a href="#" class="brand">Fixora<span>Cine</span></a>
+      <ul class="nav-links">
+        <li><a class="active" onclick="init()">Home</a></li>
+        <li><a onclick="showContinueWatchingPage()">Continue Watching</a></li>
+        <li><a onclick="loadCategory('movie')">Movies</a></li>
+        <li><a onclick="loadCategory('tv')">TV Shows</a></li>
+        
+        <!-- GENRE DROPDOWN SELECTOR -->
+        <li class="genre-dropdown-wrapper">
+          <select id="genre-select-header" class="genre-select-header">
+            <option value="" disabled selected>Genres</option>
+          </select>
+        </li>
+
+        <li><a onclick="showWatchlist()">My List</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search titles..." autocomplete="off">
+        </div>
+        <div class="search-predictions" id="search-predictions"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero" id="hero-banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge" id="hero-badge">Featured</span>
+      <h1 class="hero-title" id="hero-title">Loading...</h1>
+      <div class="hero-meta">
+        <span class="rating" id="hero-rating">98% Match</span>
+        <span id="hero-quality" class="quality-tag">HD</span>
+        <span id="hero-year">----</span>
+        <span id="hero-type">MOVIE</span>
+      </div>
+      <p class="hero-overview" id="hero-overview">Fetching live data from TMDB...</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="hero-play-btn">▶ Play</button>
+        <button class="btn btn-secondary" id="hero-list-btn">+ My List</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CATALOG CONTENT -->
+  <main>
+    <!-- CONTINUE WATCHING SECTION -->
+    <section class="section" id="section-continue" style="display: none;">
+      <div class="section-title">
+        <span>▶ Continue Watching</span>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel" id="continue-carousel"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-trending">
+      <div class="section-title">
+        <span id="trending-label">🔥 Trending Now</span>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel" id="trending-carousel"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-movies">
+      <div class="section-title">
+        <span>🎬 Popular Movies</span>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel" id="movies-carousel"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-tv">
+      <div class="section-title">
+        <span>📺 Popular TV Shows</span>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel" id="tv-carousel"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- DETAIL MODAL (MOVIES & TV SEASONS/EPISODES) -->
+  <div class="modal-overlay" id="detail-modal-overlay">
+    <div class="detail-modal">
+      <button class="close-detail-btn" id="close-detail-modal" title="Close">&times;</button>
+      
+      <div class="detail-hero" id="detail-hero">
+        <div class="detail-hero-overlay"></div>
+        <div class="detail-hero-content">
+          <h2 class="detail-title" id="detail-title">Title</h2>
+          <div class="detail-actions-bar">
+            <button class="btn-brand-play" id="detail-play-btn">
+              <span>▶</span> Play
+            </button>
+            <button class="btn-circle-action" id="detail-list-btn" title="Add to My List">+</button>
+            <button class="btn-circle-action" title="I like this">👍</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body-grid">
+        <div>
+          <div class="detail-meta-row">
+            <span class="match-score" id="detail-match">98% Match</span>
+            <span class="year-tag" id="detail-year">2024</span>
+            <span class="age-rating-badge">16+</span>
+            <span class="duration-tag" id="detail-duration">2h 15m</span>
+            <span class="quality-hd-badge" id="detail-quality">HD</span>
+          </div>
+          <p class="detail-overview-text" id="detail-overview">Overview loading...</p>
+        </div>
+
+        <div class="detail-side-column">
+          <div class="side-item">
+            <strong>Cast:</strong> <span id="detail-cast">Popular Ensemble</span>
+          </div>
+          <div class="side-item">
+            <strong>Genres:</strong> <span id="detail-genres">Action, Sci-Fi, Drama</span>
+          </div>
+          <div class="side-item">
+            <strong>This title is:</strong> <span>Exciting, Mind-Bending</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV SHOW EPISODE SELECTOR SECTION -->
+      <div class="tv-episodes-container" id="tv-episodes-section" style="display: none;">
+        <div class="tv-episodes-header">
+          <div class="tv-episodes-title">Episodes</div>
+          <select class="season-picker" id="modal-season-picker">
+            <option value="1">Season 1</option>
+          </select>
+        </div>
+        <div class="episodes-list" id="episodes-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STREAMING PLAYER MODAL -->
+  <div class="modal-overlay" id="player-modal-overlay">
+    <div class="player-modal">
+      <div class="modal-header">
+        <div class="modal-title-text" id="modal-movie-title">Stream Content</div>
+        <button class="close-detail-btn" id="close-player-modal" style="top: 0.6rem; right: 0.8rem;">&times;</button>
+      </div>
+      
+      <div class="player-container">
+        <iframe id="video-iframe" src="" allowfullscreen></iframe>
+      </div>
+
+      <div class="controls-bar">
+        <div class="control-group">
+          <label for="server-select">Server:</label>
+          <select id="server-select">
+            <option value="embedmaster">Server 1 (EmbedMaster)</option>
+            <option value="vidsrc">Server 2 (VidSrc)</option>
+            <option value="embedsu">Server 3 (EmbedSu)</option>
+            <option value="2embed">Server 4 (2Embed)</option>
+          </select>
+        </div>
+
+        <div class="control-group" id="tv-controls" style="display: none;">
+          <label for="season-select">Season:</label>
+          <select id="season-select"></select>
+          <label for="episode-select">Episode:</label>
+          <select id="episode-select"></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT ENGINE -->
+<script src="script.js"></script>
+</body>
+</html>
