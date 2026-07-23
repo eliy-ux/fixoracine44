@@ -5,18 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixoraCine — Stream Movies & TV Shows</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
 
   <!-- NAVBAR WITH GENRE DROPDOWN & PREDICTIVE SEARCH -->
   <header id="navbar">
     <div class="nav-left">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <a href="#" class="brand">Fixora<span>Cine</span></a>
-      <ul class="nav-links">
-        <li><a class="active" onclick="init()">Home</a></li>
-        <li><a onclick="showContinueWatchingPage()">Continue Watching</a></li>
-        <li><a onclick="loadCategory('movie')">Movies</a></li>
-        <li><a onclick="loadCategory('tv')">TV Shows</a></li>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="active" onclick="init(); closeMobileMenu();">Home</a></li>
+        <li><a onclick="showContinueWatchingPage(); closeMobileMenu();">Continue Watching</a></li>
+        <li><a onclick="loadCategory('movie'); closeMobileMenu();">Movies</a></li>
+        <li><a onclick="loadCategory('tv'); closeMobileMenu();">TV Shows</a></li>
         
         <!-- GENRE DROPDOWN SELECTOR -->
         <li class="genre-dropdown-wrapper">
@@ -25,7 +31,7 @@
           </select>
         </li>
 
-        <li><a onclick="showWatchlist()">My List</a></li>
+        <li><a onclick="showWatchlist(); closeMobileMenu();">My List</a></li>
       </ul>
     </div>
     <div class="nav-right">
@@ -46,8 +52,9 @@
       <span class="hero-badge" id="hero-badge">Featured</span>
       <h1 class="hero-title" id="hero-title">Loading...</h1>
       <div class="hero-meta">
-        <span class="rating" id="hero-rating">98% Match</span>
-        <span id="hero-quality" class="quality-tag">HD</span>
+        <span class="rating" id="hero-rating">⭐ 0.0</span>
+        <span class="match-score" id="hero-match">98% Match</span>
+        <span id="hero-quality" class="quality-tag quality-badge">HD</span>
         <span id="hero-year">----</span>
         <span id="hero-type">MOVIE</span>
       </div>
@@ -99,7 +106,7 @@
     </section>
   </main>
 
-  <!-- DETAIL MODAL (MOVIES & TV SEASONS/EPISODES) -->
+  <!-- DETAIL MODAL -->
   <div class="modal-overlay" id="detail-modal-overlay">
     <div class="detail-modal">
       <button class="close-detail-btn" id="close-detail-modal" title="Close">&times;</button>
@@ -121,11 +128,12 @@
       <div class="detail-body-grid">
         <div>
           <div class="detail-meta-row">
+            <span class="rating" id="detail-rating">⭐ 0.0</span>
             <span class="match-score" id="detail-match">98% Match</span>
             <span class="year-tag" id="detail-year">2024</span>
             <span class="age-rating-badge">16+</span>
             <span class="duration-tag" id="detail-duration">2h 15m</span>
-            <span class="quality-hd-badge" id="detail-quality">HD</span>
+            <span class="quality-badge" id="detail-quality">HD</span>
           </div>
           <p class="detail-overview-text" id="detail-overview">Overview loading...</p>
         </div>
@@ -152,6 +160,12 @@
           </select>
         </div>
         <div class="episodes-list" id="episodes-list"></div>
+      </div>
+
+      <!-- MATCHING / SIMILAR MOVIES SECTION -->
+      <div class="similar-content-container" id="similar-content-section">
+        <div class="similar-content-title">More Like This</div>
+        <div class="similar-grid" id="similar-grid"></div>
       </div>
     </div>
   </div>
@@ -190,6 +204,6 @@
   </div>
 
   <!-- JAVASCRIPT ENGINE -->
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
