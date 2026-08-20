@@ -3806,3 +3806,73 @@ header .nav-right {
     width: 34px;
   }
 }
+
+
+/* Second review refinements: discovery metadata and consistent row language. */
+.card-year {
+  display: none;
+  color: #bdcec7;
+  font-weight: 700;
+}
+
+.movie-card:hover .card-year,
+.movie-card:focus-within .card-year {
+  display: inline-flex;
+}
+
+.card-title[title] {
+  cursor: help;
+}
+
+.section-title span::before {
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: var(--ui-accent);
+  font-size: 0.72em;
+  transform: translateY(-1px);
+}
+
+#section-continue .section-title span::before {
+  content: '▶';
+}
+
+#section-trending .section-title span::before {
+  content: '✦';
+}
+
+#section-movies .section-title span::before {
+  content: '▸';
+}
+
+#section-tv .section-title span::before {
+  content: '▣';
+}
+
+#section-continue .carousel-container {
+  min-height: 206px;
+}
+
+#section-continue .carousel-container::before {
+  content: 'Resume a title to keep watching';
+  position: absolute;
+  right: 5rem;
+  bottom: 2.6rem;
+  z-index: 0;
+  color: rgba(202, 226, 217, 0.3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.rail-item.active {
+  color: var(--ui-accent);
+  background: rgba(116, 226, 189, 0.16);
+  box-shadow: inset 3px 0 0 var(--ui-accent), 0 0 18px rgba(116, 226, 189, 0.08);
+}
+
+@media (max-width: 768px) {
+  #section-continue .carousel-container::before {
+    display: none;
+  }
+}

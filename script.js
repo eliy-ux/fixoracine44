@@ -314,9 +314,10 @@ function renderCarousel(container, items) {
             </div>
             <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
           </div>
-          <div class="card-title">${item.title}</div>
+          <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
             <span class="star-rating">⭐ ${item.rating}</span>
+            <span class="card-year">${item.year}</span>
             <span class="age-badge">${item.matchScore}% Match</span>
             <span class="quality-badge ${qClass}">${item.quality}</span>
           </div>
@@ -381,10 +382,11 @@ function renderContinueWatching() {
             </div>
             <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
           </div>
-          <div class="card-title">${item.title}</div>
+          <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
             <span class="continue-badge">${metaText}</span>
             <span class="star-rating">⭐ ${item.rating}</span>
+            <span class="card-year">${item.year}</span>
           </div>
         </div>
       </div>
