@@ -2759,3 +2759,21 @@ main {
     padding: 4.25rem 0.7rem 0.7rem;
   }
 }
+
+
+/* Card metadata cleanup: keep cards minimal; show quality and Match only in details. */
+.movie-card .brand-badge,
+.movie-card .card-meta .quality-badge,
+.movie-card .card-meta .age-badge,
+.movie-card .card-meta::after {
+  display: none;
+}
+
+.movie-card .card-meta {
+  gap: 0;
+}
+
+.detail-meta-row .quality-badge,
+.detail-meta-row .match-score {
+  display: inline-flex;
+}
