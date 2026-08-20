@@ -2372,3 +2372,179 @@ main {
     font-size: 0.9rem;
   }
 }
+
+
+/* Final premium card pass: cleaner hierarchy and less visual noise. */
+.carousel {
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1.8rem;
+}
+
+.movie-card,
+.movie-card:first-child {
+  flex: 0 0 196px;
+  height: 276px;
+  border: 1px solid rgba(214, 255, 241, 0.1);
+  border-radius: 12px;
+  background: #101a19;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card:first-child {
+  flex-basis: 340px;
+}
+
+.movie-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(99, 214, 176, 0.58);
+  box-shadow: 0 24px 42px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(99, 214, 176, 0.12);
+}
+
+.poster-wrapper,
+.movie-card:first-child .poster-wrapper {
+  height: 100%;
+  border-radius: 11px;
+  isolation: isolate;
+}
+
+.poster-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(4, 12, 12, 0.02) 30%, rgba(4, 12, 12, 0.12) 50%, rgba(4, 12, 12, 0.96) 100%);
+  pointer-events: none;
+}
+
+.poster-wrapper::after {
+  display: none;
+}
+
+.poster-img {
+  position: relative;
+  z-index: 0;
+}
+
+.brand-badge {
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 3;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(9, 18, 17, 0.66);
+  backdrop-filter: blur(8px);
+}
+
+.card-info,
+.movie-card:first-child .card-info {
+  z-index: 4;
+  padding: 4.25rem 0.85rem 0.85rem;
+  background: linear-gradient(180deg, transparent, rgba(4, 12, 12, 0.77) 25%, rgba(4, 12, 12, 0.98) 100%);
+  gap: 0.42rem;
+}
+
+.card-title,
+.movie-card:first-child .card-title {
+  max-width: calc(100% - 2.3rem);
+  font-size: 0.84rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.movie-card:first-child .card-title {
+  font-size: 1rem;
+}
+
+.card-meta {
+  gap: 0.5rem;
+  color: #b4c8c0;
+  font-size: 0.66rem;
+}
+
+.card-meta .age-badge {
+  border: 0;
+  padding: 0;
+  color: var(--dashboard-accent);
+  font-weight: 700;
+}
+
+.card-meta .quality-badge {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.card-actions,
+.movie-card:first-child .card-actions {
+  top: auto;
+  right: 0.75rem;
+  bottom: 0.8rem;
+  left: auto;
+  opacity: 0;
+  transform: translateY(5px) scale(0.96);
+}
+
+.movie-card:hover .card-actions,
+.movie-card:focus-within .card-actions {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card-actions .icon-btn {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 9px;
+  background: rgba(8, 20, 18, 0.78);
+  border-color: rgba(220, 255, 243, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+.card-actions .icon-btn-play {
+  background: #f5fffb;
+  border-color: #f5fffb;
+  color: #091312;
+}
+
+@media (max-width: 768px) {
+  .movie-card,
+  .movie-card:first-child {
+    flex-basis: 168px;
+    height: 244px;
+  }
+
+  .movie-card:first-child {
+    flex-basis: 280px;
+  }
+
+  .card-actions,
+  .movie-card:first-child .card-actions {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-card,
+  .movie-card:first-child {
+    flex-basis: 142px;
+    height: 214px;
+  }
+
+  .movie-card:first-child {
+    flex-basis: 230px;
+  }
+
+  .card-info,
+  .movie-card:first-child .card-info {
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
+  }
+
+  .card-actions .icon-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+  }
+}
