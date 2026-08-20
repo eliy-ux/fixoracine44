@@ -16,13 +16,13 @@
       <a href="#" class="rail-brand" onclick="init();">F</a>
     </div>
     <div class="rail-center">
-      <button class="rail-item" onclick="document.getElementById('search-input').focus();" title="Search">⌕</button>
-      <button class="rail-item active" onclick="init();" title="Home">⌂</button>
-      <button class="rail-item" onclick="showContinueWatchingPage();" title="Continue Watching">▶</button>
-      <button class="rail-item" onclick="loadCategory('movie');" title="Movies">🎬</button>
-      <button class="rail-item" onclick="loadCategory('tv');" title="TV Shows">📺</button>
-      <button class="rail-item" onclick="showWatchlist();" title="My List">+</button>
-      <label class="rail-genre" title="Genres">
+      <button class="rail-item" data-label="Search" onclick="document.getElementById('search-input').focus();" title="Search" aria-label="Search">⌕</button>
+      <button class="rail-item active" data-label="Home" onclick="init();" title="Home" aria-label="Home">⌂</button>
+      <button class="rail-item" data-label="Continue Watching" onclick="showContinueWatchingPage();" title="Continue Watching" aria-label="Continue Watching">▶</button>
+      <button class="rail-item" data-label="Movies" onclick="loadCategory('movie');" title="Movies" aria-label="Movies">🎬</button>
+      <button class="rail-item" data-label="TV Shows" onclick="loadCategory('tv');" title="TV Shows" aria-label="TV Shows">📺</button>
+      <button class="rail-item" data-label="My List" onclick="showWatchlist();" title="My List" aria-label="My List">+</button>
+      <label class="rail-genre" data-label="Genres" title="Genres" aria-label="Genres">
         <span aria-hidden="true">◆</span>
         <select id="genre-select-header" aria-label="Select genre">
           <option value="" disabled selected>Genres</option>
@@ -39,7 +39,13 @@
         <span></span>
       </button>
       <a href="#" class="brand">Fixora<span>Cine</span></a>
-      <div class="header-menu-placeholder" aria-hidden="true"></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="active" onclick="init(); closeMobileMenu();">Home</a></li>
+        <li><a onclick="loadCategory('movie'); closeMobileMenu();">Movies</a></li>
+        <li><a onclick="loadCategory('tv'); closeMobileMenu();">TV Shows</a></li>
+        <li><a onclick="showContinueWatchingPage(); closeMobileMenu();">New &amp; Popular</a></li>
+        <li><a onclick="document.getElementById('genre-select-header').focus(); closeMobileMenu();">Genres</a></li>
+      </ul>
     </div>
     <div class="nav-right">
       <div class="search-box">
@@ -49,6 +55,7 @@
         </div>
         <div class="search-predictions" id="search-predictions"></div>
       </div>
+      <button class="profile-button" type="button" aria-label="Profile" title="Profile">FC</button>
     </div>
   </header>
 

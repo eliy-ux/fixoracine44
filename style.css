@@ -3585,3 +3585,224 @@ main {
     padding-top: 0.35rem;
   }
 }
+
+
+/* Applied brief refinements: cohesive header, navigation affordances, and stronger discovery UI. */
+header,
+header.scrolled {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(5, 12, 12, 0.72);
+  border-bottom: 1px solid rgba(225, 255, 245, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+header .nav-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+}
+
+header .brand {
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1.45rem;
+}
+
+header .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+header .nav-links a {
+  color: rgba(240, 253, 248, 0.64);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+header .nav-links a:hover,
+header .nav-links a.active {
+  color: #fff;
+}
+
+header .nav-links a.active::after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin-top: 0.38rem;
+  border-radius: 99px;
+  background: var(--ui-accent);
+}
+
+header .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: auto;
+  margin-left: auto;
+}
+
+.profile-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(116, 226, 189, 0.35);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #315d52, #172a27);
+  color: #e9fff6;
+  font-size: 0.62rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-button:hover {
+  transform: scale(1.08);
+  border-color: var(--ui-accent);
+}
+
+.rail-item,
+.rail-genre {
+  position: relative;
+}
+
+.rail-item::after,
+.rail-genre::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.7rem);
+  z-index: 200;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(225, 255, 245, 0.13);
+  border-radius: 7px;
+  background: #0b1917;
+  color: #e7fff5;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-5px, -50%);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.rail-item:hover::after,
+.rail-genre:hover::after,
+.rail-item:focus-visible::after,
+.rail-genre:focus-within::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.hero-overlay {
+  background: linear-gradient(90deg, rgba(2, 8, 8, 0.98) 0%, rgba(2, 8, 8, 0.76) 28%, rgba(2, 8, 8, 0.28) 64%, rgba(2, 8, 8, 0.58) 100%), linear-gradient(0deg, #080e0e 0%, rgba(8, 14, 14, 0.08) 44%, rgba(8, 14, 14, 0.3) 100%);
+}
+
+.hero-meta {
+  color: #c7dcd3;
+}
+
+.hero-meta .rating,
+.hero-meta .match-score {
+  color: var(--ui-accent);
+}
+
+.hero-actions .btn {
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  transition: transform 0.2s ease, background 0.2s ease, filter 0.2s ease;
+}
+
+.hero-actions .btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+}
+
+.hero-actions .btn-secondary {
+  background: rgba(235, 255, 247, 0.13);
+  border: 1px solid rgba(235, 255, 247, 0.24);
+}
+
+.section .carousel-container {
+  position: relative;
+}
+
+.section .carousel-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 64px;
+  z-index: 10;
+  background: linear-gradient(90deg, transparent, #080e0e);
+  pointer-events: none;
+  opacity: 0.82;
+}
+
+@media (max-width: 768px) {
+  header,
+  header.scrolled {
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 64px;
+    padding: 0.8rem 4%;
+  }
+
+  header .nav-left {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  header .brand {
+    font-size: 1.18rem;
+  }
+
+  header .nav-links {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(7, 15, 14, 0.98);
+    border-bottom: 1px solid var(--ui-line);
+  }
+
+  header .nav-links.active {
+    display: flex;
+  }
+
+  header .mobile-menu-toggle {
+    display: flex;
+  }
+
+  header .nav-right {
+    gap: 0.4rem;
+  }
+
+  .profile-button {
+    display: none;
+  }
+
+  .section .carousel-container::after {
+    width: 34px;
+  }
+}
