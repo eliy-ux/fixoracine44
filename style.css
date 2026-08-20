@@ -3499,3 +3499,58 @@ header .nav-right {
     height: 145px;
   }
 }
+
+
+/* Compact hero refinement: show more catalog above the fold. */
+.hero {
+  height: 62vh;
+  min-height: 500px;
+}
+
+.hero-content {
+  padding-top: 2.6rem;
+}
+
+.hero-title {
+  margin-bottom: 0.85rem;
+  font-size: clamp(2.35rem, 4.4vw, 4.2rem);
+}
+
+.hero-overview {
+  margin-bottom: 1.35rem;
+  line-height: 1.55;
+}
+
+.hero-actions {
+  gap: 0.55rem;
+}
+
+main {
+  margin-top: -3.2rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 55vh;
+    min-height: 410px;
+  }
+
+  .hero-content {
+    padding-top: 2rem;
+  }
+
+  main {
+    margin-top: -2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 52vh;
+    min-height: 380px;
+  }
+
+  .hero-title {
+    font-size: 2.05rem;
+  }
+}
