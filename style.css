@@ -4132,3 +4132,91 @@ main {
     padding-left: 6%;
   }
 }
+
+
+/* Premium Fixora Cine logo treatment. */
+header .brand {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding-left: 46px;
+  color: #ecfff7;
+  font-size: 1.48rem;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  text-decoration: none;
+  text-shadow: 0 0 22px rgba(116, 226, 189, 0.16);
+}
+
+header .brand::before {
+  content: 'F';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(174, 255, 225, 0.72);
+  border-radius: 10px 10px 10px 3px;
+  background: linear-gradient(145deg, #9affd8 0%, #32a987 48%, #123e36 100%);
+  color: #061411;
+  font-size: 1.12rem;
+  font-weight: 950;
+  letter-spacing: -0.08em;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 4px rgba(116, 226, 189, 0.08), 0 8px 22px rgba(30, 182, 139, 0.28);
+}
+
+header .brand::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: #e8fff5;
+  opacity: 0.9;
+  transform: translateY(-50%) rotate(45deg);
+  mix-blend-mode: overlay;
+}
+
+header .brand span {
+  color: var(--ui-accent);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+}
+
+header .brand:hover {
+  color: #fff;
+}
+
+header .brand:hover::before {
+  border-color: #d4ffed;
+  box-shadow: 0 0 0 4px rgba(116, 226, 189, 0.12), 0 10px 28px rgba(30, 182, 139, 0.4);
+  transform: translateY(-50%) rotate(-4deg) scale(1.04);
+}
+
+@media (max-width: 768px) {
+  header .brand {
+    min-height: 32px;
+    padding-left: 38px;
+    font-size: 1.18rem;
+  }
+
+  header .brand::before {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px 8px 8px 3px;
+    font-size: 0.95rem;
+  }
+
+  header .brand::after {
+    left: 11px;
+    width: 7px;
+    height: 7px;
+  }
+}
