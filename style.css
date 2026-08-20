@@ -3554,3 +3554,34 @@ main {
     font-size: 2.05rem;
   }
 }
+
+
+/* Tight catalog spacing: reduce the gap above the first movie row. */
+main {
+  margin-top: -5rem;
+  padding-top: 0;
+}
+
+.section {
+  margin-top: 0;
+  margin-bottom: 2.2rem;
+}
+
+.section-title {
+  margin-bottom: 0;
+}
+
+.carousel {
+  padding-top: 0.45rem;
+  padding-bottom: 1.45rem;
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: -3.2rem;
+  }
+
+  .carousel {
+    padding-top: 0.35rem;
+  }
+}
