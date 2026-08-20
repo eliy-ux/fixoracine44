@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FixoraCine — discover movies and TV shows, build your watchlist, and continue watching your favorite titles.">
+  <meta name="theme-color" content="#080e0e">
   <title>FixoraCine — Stream Movies & TV Shows</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="logo.png">
@@ -10,27 +12,6 @@
 <body>
 
   <!-- NAVBAR WITH GENRE DROPDOWN & PREDICTIVE SEARCH -->
-  <!-- SIDE NAVIGATION RAIL -->
-  <nav class="side-rail" id="side-rail">
-    <div class="rail-top">
-      <a href="#" class="rail-brand" onclick="init();">F</a>
-    </div>
-    <div class="rail-center">
-      <button class="rail-item" data-label="Search" onclick="document.getElementById('search-input').focus();" title="Search" aria-label="Search">⌕</button>
-      <button class="rail-item active" data-label="Home" onclick="init();" title="Home" aria-label="Home">⌂</button>
-      <button class="rail-item" data-label="Continue Watching" onclick="showContinueWatchingPage();" title="Continue Watching" aria-label="Continue Watching">▶</button>
-      <button class="rail-item" data-label="Movies" onclick="loadCategory('movie');" title="Movies" aria-label="Movies">🎬</button>
-      <button class="rail-item" data-label="TV Shows" onclick="loadCategory('tv');" title="TV Shows" aria-label="TV Shows">📺</button>
-      <button class="rail-item" data-label="My List" onclick="showWatchlist();" title="My List" aria-label="My List">+</button>
-      <label class="rail-genre" data-label="Genres" title="Genres" aria-label="Genres">
-        <span aria-hidden="true">◆</span>
-        <select id="genre-select-header" aria-label="Select genre">
-          <option value="" disabled selected>Genres</option>
-        </select>
-      </label>
-    </div>
-  </nav>
-
   <header id="navbar">
     <div class="nav-left">
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
@@ -39,7 +20,17 @@
         <span></span>
       </button>
       <a href="#" class="brand">Fixora<span>Cine</span></a>
-      <div class="header-menu-placeholder" aria-hidden="true"></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="active" onclick="init(); closeMobileMenu();">Home</a></li>
+        <li><a onclick="loadCategory('movie'); closeMobileMenu();">Movies</a></li>
+        <li><a onclick="loadCategory('tv'); closeMobileMenu();">TV Shows</a></li>
+        <li><a onclick="showContinueWatchingPage(); closeMobileMenu();">New &amp; Popular</a></li>
+        <li class="genre-dropdown-wrapper">
+          <select id="genre-select-header" class="genre-select-header" aria-label="Select genre">
+            <option value="" disabled selected>Genres</option>
+          </select>
+        </li>
+      </ul>
     </div>
     <div class="nav-right">
       <div class="search-box">
@@ -58,15 +49,15 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="hero-badge" id="hero-badge">Featured</span>
-      <h1 class="hero-title" id="hero-title">Loading...</h1>
+      <h1 class="hero-title" id="hero-title">Featured title</h1>
       <div class="hero-meta">
-        <span class="rating" id="hero-rating">⭐ 0.0</span>
+        <span class="rating" id="hero-rating">★ 0.0</span>
         <span class="match-score" id="hero-match">98% Match</span>
         <span id="hero-quality" class="quality-tag quality-badge">HD</span>
         <span id="hero-year">----</span>
         <span id="hero-type">MOVIE</span>
       </div>
-      <p class="hero-overview" id="hero-overview">Fetching live data from TMDB...</p>
+      <p class="hero-overview" id="hero-overview">Discover your next favorite movie or series.</p>
       <div class="hero-actions">
         <button class="btn btn-primary" id="hero-play-btn">▶ Play</button>
         <button class="btn btn-secondary" id="hero-list-btn" onclick="event.stopPropagation(); openDetailModal(currentItem.id)">More Info</button>
@@ -122,7 +113,7 @@
       <div class="detail-hero" id="detail-hero">
         <div class="detail-hero-overlay"></div>
         <div class="detail-hero-content">
-          <h2 class="detail-title" id="detail-title">Title</h2>
+          <h2 class="detail-title" id="detail-title">Movie details</h2>
           <div class="detail-actions-bar">
             <button class="btn-brand-play" id="detail-play-btn">
               <span>▶</span> Play
@@ -143,12 +134,12 @@
             <span class="duration-tag" id="detail-duration">2h 15m</span>
             <span class="quality-badge" id="detail-quality">HD</span>
           </div>
-          <p class="detail-overview-text" id="detail-overview">Overview loading...</p>
+          <p class="detail-overview-text" id="detail-overview">Choose a title to view its story, cast, genres, and playback options.</p>
         </div>
 
         <div class="detail-side-column">
-          <div class="side-item">
-            <strong>Cast:</strong> <span id="detail-cast">Popular Ensemble</span>
+              <div class="side-item">
+                <strong>Cast:</strong> <span id="detail-cast">Cast information</span>
           </div>
           <div class="side-item">
             <strong>Genres:</strong> <span id="detail-genres">Action, Sci-Fi, Drama</span>

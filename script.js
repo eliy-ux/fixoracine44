@@ -272,7 +272,7 @@ function setHero(item) {
   currentItem = item;
   heroBanner.style.backgroundImage = `url('${item.backdrop}')`;
   heroTitle.textContent = item.title;
-  heroRating.textContent = `⭐ ${item.rating}`;
+  heroRating.textContent = `★ ${item.rating}`;
   heroMatch.textContent = `${item.matchScore}% Match`;
 
   // Apply real quality badge and styling
@@ -316,7 +316,7 @@ function renderCarousel(container, items) {
           </div>
           <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
-            <span class="star-rating">⭐ ${item.rating}</span>
+            <span class="star-rating">★ ${item.rating}</span>
             <span class="card-year">${item.year}</span>
             <span class="age-badge">${item.matchScore}% Match</span>
             <span class="quality-badge ${qClass}">${item.quality}</span>
@@ -385,7 +385,7 @@ function renderContinueWatching() {
           <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
             <span class="continue-badge">${metaText}</span>
-            <span class="star-rating">⭐ ${item.rating}</span>
+            <span class="star-rating">★ ${item.rating}</span>
             <span class="card-year">${item.year}</span>
           </div>
         </div>
@@ -420,7 +420,7 @@ async function openDetailModal(id) {
   currentItem = item;
   detailHero.style.backgroundImage = `url('${item.backdrop}')`;
   detailTitle.textContent = item.title;
-  detailRating.textContent = `⭐ ${item.rating}`;
+  detailRating.textContent = `★ ${item.rating}`;
   detailMatch.textContent = `${item.matchScore}% Match`;
   detailYear.textContent = item.year;
   
@@ -477,7 +477,7 @@ async function loadSimilarContent(id, type) {
           <div class="similar-info">
             <div class="similar-title">${item.title}</div>
             <div class="similar-meta">
-              <span class="star-rating">⭐ ${item.rating}</span>
+              <span class="star-rating">★ ${item.rating}</span>
               <span class="year-tag">${item.year}</span>
             </div>
             <div class="similar-overview">${item.overview}</div>
@@ -587,7 +587,7 @@ searchInput.addEventListener('input', (e) => {
             <img src="${item.poster}" class="prediction-thumb" alt="${item.title}">
             <div class="prediction-info">
               <span class="prediction-title">${item.title}</span>
-              <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ⭐ ${item.rating} • ${item.quality}</span>
+              <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ★ ${item.rating} • ${item.quality}</span>
             </div>
           </div>
         `).join('');
