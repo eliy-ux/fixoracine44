@@ -10,6 +10,20 @@
 <body>
 
   <!-- NAVBAR WITH GENRE DROPDOWN & PREDICTIVE SEARCH -->
+  <!-- SIDE NAVIGATION RAIL -->
+  <nav class="side-rail" id="side-rail">
+    <div class="rail-top">
+      <a href="#" class="rail-brand" onclick="init();">F</a>
+    </div>
+    <div class="rail-center">
+      <button class="rail-item" onclick="document.getElementById('search-input').focus();" title="Search">⌕</button>
+      <button class="rail-item active" onclick="init();" title="Home">⌂</button>
+      <button class="rail-item" onclick="loadCategory('movie');" title="Movies">🎬</button>
+      <button class="rail-item" onclick="loadCategory('tv');" title="TV Shows">📺</button>
+      <button class="rail-item" onclick="showWatchlist();" title="My List">+</button>
+    </div>
+  </nav>
+
   <header id="navbar">
     <div class="nav-left">
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
@@ -23,14 +37,11 @@
         <li><a onclick="showContinueWatchingPage(); closeMobileMenu();">Continue Watching</a></li>
         <li><a onclick="loadCategory('movie'); closeMobileMenu();">Movies</a></li>
         <li><a onclick="loadCategory('tv'); closeMobileMenu();">TV Shows</a></li>
-        
-        <!-- GENRE DROPDOWN SELECTOR -->
         <li class="genre-dropdown-wrapper">
           <select id="genre-select-header" class="genre-select-header">
             <option value="" disabled selected>Genres</option>
           </select>
         </li>
-
         <li><a onclick="showWatchlist(); closeMobileMenu();">My List</a></li>
       </ul>
     </div>
@@ -61,7 +72,7 @@
       <p class="hero-overview" id="hero-overview">Fetching live data from TMDB...</p>
       <div class="hero-actions">
         <button class="btn btn-primary" id="hero-play-btn">▶ Play</button>
-        <button class="btn btn-secondary" id="hero-list-btn">+ My List</button>
+        <button class="btn btn-secondary" id="hero-list-btn" onclick="event.stopPropagation(); openDetailModal(currentItem.id)">More Info</button>
       </div>
     </div>
   </section>
