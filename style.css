@@ -1352,3 +1352,316 @@ select {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ==========================================================================
+   FIXORA CINE 44 — VISUAL REFINEMENT LAYER
+   Styling-only overrides; existing structure and interactions are unchanged.
+   ========================================================================== */
+:root {
+  --bg-main: #080a10;
+  --bg-surface: #10131d;
+  --bg-card: #1a2030;
+  --primary: #f0445c;
+  --primary-hover: #ff5b72;
+  --text-main: #f8f9fc;
+  --text-muted: #9ca6bb;
+  --border: rgba(255, 255, 255, 0.1);
+  --radius: 12px;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+}
+
+body {
+  background: radial-gradient(circle at 70% -10%, rgba(91, 58, 125, 0.22), transparent 34rem), var(--bg-main);
+  color: var(--text-main);
+  letter-spacing: 0.01em;
+}
+
+header {
+  padding: 1.1rem 5%;
+  background: linear-gradient(180deg, rgba(8, 10, 16, 0.96), rgba(8, 10, 16, 0.42) 72%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+header.scrolled {
+  background: rgba(8, 10, 16, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+}
+
+.brand {
+  font-size: 1.72rem;
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 24px rgba(240, 68, 92, 0.35);
+}
+
+.brand span {
+  color: #fff;
+}
+
+.nav-left {
+  gap: 2.4rem;
+}
+
+.nav-links {
+  gap: 1.45rem;
+}
+
+.nav-links a {
+  color: #b6bfd1;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #fff;
+}
+
+.nav-links a.active::after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin-top: 5px;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+.search-input-wrapper, .genre-select-header {
+  background: rgba(20, 25, 37, 0.82);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.search-input-wrapper {
+  border-radius: 10px;
+  padding: 0.5rem 0.85rem;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: rgba(240, 68, 92, 0.8);
+  box-shadow: 0 0 0 3px rgba(240, 68, 92, 0.12);
+}
+
+.genre-select-header {
+  border-radius: 10px;
+}
+
+.hero {
+  height: 78vh;
+  min-height: 560px;
+  padding: 0 5%;
+  background-position: center 20%;
+}
+
+.hero-overlay {
+  background: linear-gradient(0deg, var(--bg-main) 1%, rgba(8, 10, 16, 0.48) 47%, rgba(8, 10, 16, 0.45) 100%), linear-gradient(90deg, var(--bg-main) 0%, rgba(8, 10, 16, 0.28) 55%, rgba(8, 10, 16, 0.72) 100%);
+}
+
+.hero-content {
+  max-width: 620px;
+  padding-top: 3.5rem;
+}
+
+.hero-badge {
+  background: rgba(240, 68, 92, 0.95);
+  border-radius: 999px;
+  padding: 0.34rem 0.75rem;
+  box-shadow: 0 8px 24px rgba(240, 68, 92, 0.22);
+}
+
+.hero-title {
+  font-size: clamp(2.65rem, 5vw, 4.7rem);
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+  margin-bottom: 1rem;
+}
+
+.hero-meta {
+  gap: 0.7rem;
+  color: #c3cad8;
+}
+
+.hero-overview {
+  color: #d8deea;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.btn, .btn-brand-play {
+  border-radius: 9px;
+  min-height: 44px;
+}
+
+.btn-primary, .btn-brand-play {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(240, 68, 92, 0.24);
+}
+
+.btn-primary:hover, .btn-brand-play:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+}
+
+main {
+  margin-top: -4.5rem;
+}
+
+.section {
+  margin-bottom: 3.2rem;
+  padding: 0 5%;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: #f3f5fa;
+  margin-bottom: 0.25rem;
+}
+
+.section-title span::first-letter {
+  color: var(--primary);
+}
+
+.carousel {
+  gap: 1.15rem;
+  padding: 1.35rem 0 1.6rem;
+}
+
+.movie-card {
+  flex-basis: 258px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 13px;
+  background: linear-gradient(180deg, #182033, #10131d);
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+.movie-card:hover {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(240, 68, 92, 0.35);
+}
+
+.poster-wrapper {
+  height: 170px;
+  border-radius: 0;
+}
+
+.poster-img {
+  transition: transform 0.55s ease, filter 0.55s ease;
+}
+
+.movie-card:hover .poster-img {
+  transform: scale(1.06);
+  filter: saturate(1.1);
+}
+
+.card-info {
+  padding: 0.95rem 1rem 1.05rem;
+  background: transparent;
+  gap: 0.7rem;
+}
+
+.card-title {
+  font-size: 0.92rem;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.icon-btn-play {
+  background: #fff;
+}
+
+.modal-overlay {
+  background: rgba(3, 5, 10, 0.78);
+  backdrop-filter: blur(16px);
+}
+
+.detail-modal, .player-modal {
+  background: #10131d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7);
+}
+
+.detail-hero {
+  height: 420px;
+  padding: 2.75rem;
+}
+
+.detail-hero-overlay {
+  background: linear-gradient(0deg, #10131d 0%, rgba(16, 19, 29, 0.32) 55%, rgba(3, 5, 10, 0.58) 100%);
+}
+
+.close-detail-btn {
+  background: rgba(16, 19, 29, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(8px);
+}
+
+.detail-body-grid, .tv-episodes-container, .similar-content-container {
+  background: #10131d;
+}
+
+.detail-body-grid {
+  padding: 2.5rem 2.75rem;
+}
+
+.side-item strong {
+  color: #9ca6bb;
+}
+
+.episode-card, .similar-card {
+  background: #171d2a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.episode-card:hover, .similar-card:hover {
+  background: #20283a;
+}
+
+.modal-header, .controls-bar {
+  background: #171d2a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+select {
+  background: #10131d;
+  border-color: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+}
+
+@media (max-width: 992px) {
+  .movie-card { flex-basis: 220px; }
+  .poster-wrapper { height: 145px; }
+}
+
+@media (max-width: 768px) {
+  header { padding: 0.9rem 4%; }
+  .hero { height: 68vh; min-height: 470px; padding: 0 6%; }
+  .hero-content { padding-top: 2.5rem; }
+  main { margin-top: -2.5rem; }
+  .section { padding: 0 6%; }
+  .nav-links { top: 60px; background: rgba(12, 15, 24, 0.97); backdrop-filter: blur(16px); }
+  .movie-card { flex-basis: 190px; }
+  .poster-wrapper { height: 116px; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 0 5%; }
+  .hero-title { font-size: 2.35rem; }
+  .section { padding: 0 5%; }
+  .movie-card { flex-basis: 155px; }
+  .poster-wrapper { height: 96px; }
+}
