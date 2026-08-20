@@ -2777,3 +2777,29 @@ main {
 .detail-meta-row .match-score {
   display: inline-flex;
 }
+
+
+/* One real quality tag per movie card. The value comes from item.quality and its dynamic class. */
+.movie-card .brand-badge {
+  display: inline-flex;
+  align-items: center;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 6;
+  padding: 0.3rem 0.58rem;
+  border-radius: 6px;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.28);
+}
+
+.movie-card .card-meta .quality-badge,
+.movie-card .card-meta .age-badge,
+.movie-card .card-meta::after {
+  display: none;
+}
+
+.detail-meta-row .quality-badge,
+.detail-meta-row .match-score {
+  display: inline-flex;
+}
