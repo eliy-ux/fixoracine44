@@ -2970,3 +2970,64 @@ main {
     padding-left: 5%;
   }
 }
+
+
+/* Sidebar-only navigation mode. */
+header .nav-left {
+  flex: 1;
+}
+
+header .brand,
+header .mobile-menu-toggle,
+header .header-menu-placeholder {
+  display: none;
+}
+
+header .nav-right {
+  margin-left: auto;
+}
+
+.rail-center {
+  gap: 0.85rem;
+}
+
+.rail-genre {
+  position: relative;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: rgba(238, 255, 248, 0.55);
+  cursor: pointer;
+}
+
+.rail-genre > span {
+  pointer-events: none;
+  font-size: 0.72rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.rail-genre:hover > span,
+.rail-genre:focus-within > span {
+  color: var(--dashboard-accent);
+  transform: rotate(45deg);
+}
+
+.rail-genre select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  header .nav-left {
+    display: none;
+  }
+
+  header .nav-right {
+    width: 100%;
+  }
+}

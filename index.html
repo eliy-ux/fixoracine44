@@ -18,9 +18,16 @@
     <div class="rail-center">
       <button class="rail-item" onclick="document.getElementById('search-input').focus();" title="Search">⌕</button>
       <button class="rail-item active" onclick="init();" title="Home">⌂</button>
+      <button class="rail-item" onclick="showContinueWatchingPage();" title="Continue Watching">▶</button>
       <button class="rail-item" onclick="loadCategory('movie');" title="Movies">🎬</button>
       <button class="rail-item" onclick="loadCategory('tv');" title="TV Shows">📺</button>
       <button class="rail-item" onclick="showWatchlist();" title="My List">+</button>
+      <label class="rail-genre" title="Genres">
+        <span aria-hidden="true">◆</span>
+        <select id="genre-select-header" aria-label="Select genre">
+          <option value="" disabled selected>Genres</option>
+        </select>
+      </label>
     </div>
   </nav>
 
@@ -32,18 +39,7 @@
         <span></span>
       </button>
       <a href="#" class="brand">Fixora<span>Cine</span></a>
-      <ul class="nav-links" id="nav-links">
-        <li><a class="active" onclick="init(); closeMobileMenu();">Home</a></li>
-        <li><a onclick="showContinueWatchingPage(); closeMobileMenu();">Continue Watching</a></li>
-        <li><a onclick="loadCategory('movie'); closeMobileMenu();">Movies</a></li>
-        <li><a onclick="loadCategory('tv'); closeMobileMenu();">TV Shows</a></li>
-        <li class="genre-dropdown-wrapper">
-          <select id="genre-select-header" class="genre-select-header">
-            <option value="" disabled selected>Genres</option>
-          </select>
-        </li>
-        <li><a onclick="showWatchlist(); closeMobileMenu();">My List</a></li>
-      </ul>
+      <div class="header-menu-placeholder" aria-hidden="true"></div>
     </div>
     <div class="nav-right">
       <div class="search-box">
