@@ -3469,3 +3469,33 @@ header .nav-right {
     min-height: 27px;
   }
 }
+
+
+/* Borderless hero blend: soft bottom fade instead of a visible line. */
+.hero {
+  border: 0;
+  outline: 0;
+  box-shadow: 0 34px 56px -46px rgba(0, 0, 0, 0.95);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 190px;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 13, 13, 0.22) 38%, #080e0e 100%);
+  pointer-events: none;
+}
+
+.hero-content {
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .hero::after {
+    height: 145px;
+  }
+}
