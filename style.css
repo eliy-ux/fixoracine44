@@ -1785,3 +1785,336 @@ select {
     gap: 0.35rem;
   }
 }
+
+
+/* ========================================================================== 
+   PREMIUM DASHBOARD HOMEPAGE — reference-inspired visual layer
+   Existing IDs, event handlers, data loading, modals, and player behavior stay unchanged.
+   ========================================================================== */
+:root {
+  --dashboard-ink: #081111;
+  --dashboard-panel: #0c1515;
+  --dashboard-mint: #d9f1e8;
+  --dashboard-muted: #a7b9b2;
+  --dashboard-accent: #63d6b0;
+}
+
+html {
+  background: var(--dashboard-mint);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 15%, rgba(255, 255, 255, 0.72) 0 2px, transparent 3px) 0 0 / 18px 18px,
+    radial-gradient(circle at 92% 78%, rgba(99, 214, 176, 0.24), transparent 19rem),
+    var(--dashboard-mint);
+  color: #f7fffc;
+}
+
+header {
+  top: 28px;
+  left: 50%;
+  width: min(calc(100% - 64px), 1160px);
+  padding: 1.25rem 3.9rem;
+  transform: translateX(-50%);
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, rgba(5, 13, 13, 0.72), rgba(5, 13, 13, 0.05));
+}
+
+header.scrolled {
+  background: rgba(7, 16, 16, 0.92);
+  border-radius: 0 0 18px 18px;
+}
+
+.brand {
+  color: var(--dashboard-accent);
+  font-size: 1.42rem;
+  letter-spacing: -0.045em;
+}
+
+.brand span {
+  color: #f5fffb;
+}
+
+.nav-left,
+.nav-right,
+.nav-links {
+  gap: 1.65rem;
+}
+
+.nav-links a {
+  color: rgba(240, 253, 248, 0.62);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+}
+
+.nav-links a.active::after {
+  display: none;
+}
+
+.search-input-wrapper,
+.genre-select-header {
+  border: 1px solid rgba(222, 255, 242, 0.15);
+  background: rgba(222, 255, 242, 0.1);
+  box-shadow: none;
+}
+
+.search-input-wrapper {
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+}
+
+.search-input {
+  width: 125px;
+  font-size: 0.72rem;
+}
+
+.search-input-wrapper:focus-within {
+  width: 220px;
+  border-color: rgba(99, 214, 176, 0.7);
+  box-shadow: 0 0 0 3px rgba(99, 214, 176, 0.12);
+}
+
+.genre-select-header {
+  border-radius: 8px;
+}
+
+.hero {
+  width: min(calc(100% - 64px), 1160px);
+  height: 690px;
+  min-height: 600px;
+  margin: 28px auto 0;
+  padding: 0 3.9rem;
+  border-radius: 22px;
+  overflow: hidden;
+  background-position: center;
+  box-shadow: 0 28px 55px rgba(24, 86, 67, 0.18);
+}
+
+.hero-overlay {
+  background: linear-gradient(90deg, rgba(3, 12, 12, 0.93) 0%, rgba(3, 12, 12, 0.62) 43%, rgba(3, 12, 12, 0.12) 100%), linear-gradient(0deg, #081111 0%, rgba(8, 17, 17, 0.03) 55%, rgba(8, 17, 17, 0.36) 100%);
+}
+
+.hero-content {
+  max-width: 420px;
+  padding-top: 4.8rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  gap: 0.45rem;
+  background: rgba(99, 214, 176, 0.16);
+  border: 1px solid rgba(99, 214, 176, 0.4);
+  color: #a8f2d8;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.hero-title {
+  max-width: 390px;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.hero-meta {
+  gap: 0.55rem;
+  font-size: 0.76rem;
+}
+
+.hero-overview {
+  max-width: 390px;
+  color: #c0d4cd;
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  gap: 0.7rem;
+}
+
+.btn {
+  min-height: 38px;
+  padding: 0.58rem 1.15rem;
+  border-radius: 7px;
+  font-size: 0.78rem;
+}
+
+.btn-primary,
+.btn-brand-play {
+  background: #f5fffb;
+  color: #0c1715;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-primary:hover,
+.btn-brand-play:hover {
+  background: var(--dashboard-accent);
+}
+
+.btn-secondary {
+  background: rgba(219, 255, 241, 0.1);
+  border: 1px solid rgba(219, 255, 241, 0.2);
+  color: #f5fffb;
+}
+
+main {
+  width: min(calc(100% - 64px), 1160px);
+  margin: -6.5rem auto 0;
+  padding: 0 3.9rem 3.5rem;
+  border-radius: 0 0 22px 22px;
+  background: var(--dashboard-panel);
+  box-shadow: 0 28px 55px rgba(24, 86, 67, 0.18);
+}
+
+.section {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.section-title {
+  margin-bottom: 0.35rem;
+  color: #f4fffb;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+
+.carousel {
+  gap: 0.7rem;
+  padding: 0.75rem 0 1.2rem;
+}
+
+.movie-card {
+  flex-basis: 142px;
+  border: 0;
+  border-radius: 8px;
+  background: #15201f;
+  box-shadow: none;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(99, 214, 176, 0.22);
+}
+
+.poster-wrapper {
+  height: 184px;
+  border-radius: 8px;
+}
+
+.card-info {
+  padding: 0.55rem 0.2rem 0.35rem;
+  background: transparent;
+  gap: 0.38rem;
+}
+
+.card-actions {
+  display: none;
+}
+
+.card-title {
+  font-size: 0.75rem;
+}
+
+.card-meta {
+  gap: 0.35rem;
+  font-size: 0.64rem;
+}
+
+.quality-badge,
+.age-badge {
+  font-size: 0.57rem;
+}
+
+.movie-card:first-child {
+  flex-basis: 285px;
+}
+
+.movie-card:first-child .poster-wrapper {
+  height: 184px;
+}
+
+.movie-card:first-child .card-info {
+  padding-left: 0.15rem;
+}
+
+.movie-card:first-child .card-actions {
+  display: flex;
+  position: absolute;
+  right: 0.55rem;
+  bottom: 3.15rem;
+  z-index: 4;
+}
+
+.movie-card:first-child .card-title {
+  font-size: 0.78rem;
+}
+
+.continue-badge {
+  color: var(--dashboard-accent);
+}
+
+@media (max-width: 768px) {
+  header {
+    top: 16px;
+    width: calc(100% - 28px);
+    padding: 1rem 1.2rem;
+  }
+
+  .hero {
+    width: calc(100% - 28px);
+    height: 570px;
+    min-height: 520px;
+    margin-top: 16px;
+    padding: 0 1.4rem;
+    border-radius: 16px;
+  }
+
+  .hero-content {
+    padding-top: 4rem;
+  }
+
+  main {
+    width: calc(100% - 28px);
+    margin-top: -3.5rem;
+    padding: 0 1.4rem 2.4rem;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .movie-card,
+  .movie-card:first-child {
+    flex-basis: 126px;
+  }
+
+  .poster-wrapper,
+  .movie-card:first-child .poster-wrapper {
+    height: 160px;
+  }
+
+  .movie-card:first-child .card-actions {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.35rem;
+  }
+
+  .movie-card,
+  .movie-card:first-child {
+    flex-basis: 112px;
+  }
+
+  .poster-wrapper,
+  .movie-card:first-child .poster-wrapper {
+    height: 145px;
+  }
+}
