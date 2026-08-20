@@ -7,9 +7,26 @@ const IMG_BASE_URL = "https://image.tmdb.org/t/p/original";
 const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 let currentItem = null;
-let watchlist = JSON.parse(localStorage.getItem('fixoracine_watchlist')) || [];
-let continueWatchingList = JSON.parse(localStorage.getItem('fixoracine_continue_watching')) || [];
+
+function readStoredList(key) {
+  try {
+    const stored = JSON.parse(localStorage.getItem(key) || '[]');
+    return Array.isArray(stored) ? stored : [];
+  } catch (error) {
+    console.warn(`Unable to read saved data for ${key}:`, error);
+    return [];
+  }
+}
+
+let watchlist = readStoredList('fixoracine_watchlist');
+let continueWatchingList = readStoredList('fixoracine_continue_watching');
 let itemsCache = {};
+
+// Restore persisted items into the cache so My List and Continue Watching
+// remain usable after a page refresh.
+[...watchlist, ...continueWatchingList].forEach(item => {
+  if (item && item.id != null) itemsCache[item.id] = item;
+});
 
 /* ==========================================================================
    DOM ELEMENTS
@@ -117,7 +134,11 @@ function getQualityCssClass(qualityTag) {
    ========================================================================== */
 async function fetchFromTMDB(endpoint) {
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${TMDB_API_KEY}&language=en-US`);
+    const separator = endpoint.includes('?') ? '&' : '?';
+    const response = await fetch(`${BASE_URL}${endpoint}${separator}api_key=${TMDB_API_KEY}&language=en-US`);
+    if (!response.ok) {
+      throw new Error(`TMDB request failed with status ${response.status}`);
+    }
     const data = await response.json();
     return data.results || data;
   } catch (error) {
@@ -334,6 +355,9 @@ function renderContinueWatching() {
   }
 
   sectionContinue.style.display = 'block';
+  continueWatchingList.forEach(item => {
+    if (item && item.id != null) itemsCache[item.id] = item;
+  });
   continueCarousel.innerHTML = continueWatchingList.map(item => {
     const metaText = item.type === 'tv' 
       ? `S${item.season}:E${item.episode}` 
@@ -719,6 +743,9 @@ function updateWatchlistBtnUI(btnElement, item) {
 }
 
 function showWatchlist() {
+  watchlist.forEach(item => {
+    if (item && item.id != null) itemsCache[item.id] = item;
+  });
   document.getElementById('section-movies').style.display = 'none';
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
