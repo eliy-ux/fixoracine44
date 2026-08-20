@@ -308,11 +308,11 @@ function renderCarousel(container, items) {
         <div class="card-info">
           <div class="card-actions">
             <div class="action-btns-left">
-              <button class="icon-btn icon-btn-play" title="Play" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">▶</button>
+              <button class="icon-btn icon-btn-play" title="Play" aria-label="Play" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">▶</button>
               <button class="icon-btn" title="Add to List" onclick="event.stopPropagation(); toggleWatchlist(itemsCache[${item.id}], this)">+</button>
-              <button class="icon-btn" title="Like">👍</button>
+              <button class="icon-btn" title="Like" aria-label="Like">♡</button>
             </div>
-            <button class="icon-btn" title="Details" onclick="event.stopPropagation(); openDetailModal(${item.id})">v</button>
+            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
           </div>
           <div class="card-title">${item.title}</div>
           <div class="card-meta">
@@ -376,10 +376,10 @@ function renderContinueWatching() {
         <div class="card-info">
           <div class="card-actions">
             <div class="action-btns-left">
-              <button class="icon-btn icon-btn-play" title="Resume" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">▶</button>
-              <button class="icon-btn" title="Remove" onclick="event.stopPropagation(); removeFromContinueWatching(${item.id})">✕</button>
+              <button class="icon-btn icon-btn-play" title="Resume" aria-label="Resume" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">▶</button>
+              <button class="icon-btn" title="Remove" aria-label="Remove from Continue Watching" onclick="event.stopPropagation(); removeFromContinueWatching(${item.id})">×</button>
             </div>
-            <button class="icon-btn" title="Details" onclick="event.stopPropagation(); openDetailModal(${item.id})">v</button>
+            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
           </div>
           <div class="card-title">${item.title}</div>
           <div class="card-meta">

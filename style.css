@@ -1665,3 +1665,123 @@ select {
   .movie-card { flex-basis: 155px; }
   .poster-wrapper { height: 96px; }
 }
+
+
+/* Icon system refinement: visual-only, existing actions are unchanged. */
+.icon-btn,
+.btn-circle-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 0;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.07);
+  color: #dfe5f2;
+  font-family: inherit;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-btn:hover,
+.btn-circle-action:hover,
+.icon-btn:focus-visible,
+.btn-circle-action:focus-visible {
+  color: #fff;
+  background: rgba(240, 68, 92, 0.16);
+  border-color: rgba(240, 68, 92, 0.75);
+  box-shadow: 0 0 0 3px rgba(240, 68, 92, 0.12);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.icon-btn:active,
+.btn-circle-action:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.icon-btn-play {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-size: 0.92rem;
+  box-shadow: 0 7px 18px rgba(240, 68, 92, 0.22);
+}
+
+.icon-btn-play:hover,
+.icon-btn-play:focus-visible {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}
+
+.action-btns-left {
+  gap: 0.45rem;
+}
+
+.card-actions .icon-btn:nth-child(2) {
+  font-size: 1.35rem;
+}
+
+.card-actions .icon-btn:nth-child(3) {
+  color: #aeb8ca;
+  font-size: 1.3rem;
+}
+
+.card-actions > .icon-btn:last-child {
+  color: #aeb8ca;
+  font-size: 1.28rem;
+}
+
+.card-actions > .icon-btn:last-child:hover,
+.card-actions > .icon-btn:last-child:focus-visible {
+  color: #fff;
+}
+
+.btn-circle-action {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  font-size: 1.35rem;
+}
+
+.btn-circle-action#detail-list-btn {
+  font-size: 1.55rem;
+}
+
+.close-detail-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  line-height: 0.8;
+}
+
+.search-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  transform: rotate(-20deg);
+}
+
+@media (max-width: 480px) {
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .action-btns-left {
+    gap: 0.35rem;
+  }
+}

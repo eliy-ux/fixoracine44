@@ -37,7 +37,7 @@
     <div class="nav-right">
       <div class="search-box">
         <div class="search-input-wrapper">
-          <span class="search-icon">🔍</span>
+          <span class="search-icon" aria-hidden="true">⌕</span>
           <input type="text" id="search-input" class="search-input" placeholder="Search titles..." autocomplete="off">
         </div>
         <div class="search-predictions" id="search-predictions"></div>
@@ -109,7 +109,7 @@
   <!-- DETAIL MODAL -->
   <div class="modal-overlay" id="detail-modal-overlay">
     <div class="detail-modal">
-      <button class="close-detail-btn" id="close-detail-modal" title="Close">&times;</button>
+      <button class="close-detail-btn" id="close-detail-modal" title="Close" aria-label="Close details">&times;</button>
       
       <div class="detail-hero" id="detail-hero">
         <div class="detail-hero-overlay"></div>
@@ -119,8 +119,8 @@
             <button class="btn-brand-play" id="detail-play-btn">
               <span>▶</span> Play
             </button>
-            <button class="btn-circle-action" id="detail-list-btn" title="Add to My List">+</button>
-            <button class="btn-circle-action" title="I like this">👍</button>
+            <button class="btn-circle-action" id="detail-list-btn" title="Add to My List" aria-label="Add to My List">+</button>
+            <button class="btn-circle-action" title="I like this" aria-label="Like this title">♡</button>
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@
     <div class="player-modal">
       <div class="modal-header">
         <div class="modal-title-text" id="modal-movie-title">Stream Content</div>
-        <button class="close-detail-btn" id="close-player-modal" style="top: 0.6rem; right: 0.8rem;">&times;</button>
+        <button class="close-detail-btn" id="close-player-modal" title="Close player" aria-label="Close player" style="top: 0.6rem; right: 0.8rem;">&times;</button>
       </div>
       
       <div class="player-container">
