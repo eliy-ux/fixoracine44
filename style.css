@@ -4660,3 +4660,76 @@ header .brand:hover::before {
 .carousel .movie-card:focus-within .card-hover-play {
   transform: translate(-50%, -50%) !important;
 }
+
+
+/* Genre discovery grid: Netflix-style posters with four columns on desktop. */
+#section-trending .genre-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.35rem 1rem;
+  overflow: visible;
+  padding: 0.25rem 0.1rem 0.65rem;
+}
+
+#section-trending .genre-results-grid .movie-card,
+#section-trending .genre-results-grid .movie-card:first-child {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+#section-trending .genre-results-grid .movie-card:hover,
+#section-trending .genre-results-grid .movie-card:focus-within {
+  transform: none !important;
+}
+
+.load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 148px;
+  min-height: 42px;
+  margin: 1.35rem auto 0;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(116, 226, 189, 0.45);
+  border-radius: 999px;
+  background: rgba(116, 226, 189, 0.1);
+  color: #d9fff0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.load-more-btn:hover,
+.load-more-btn:focus-visible {
+  border-color: var(--ui-accent, #74e2bd);
+  background: var(--ui-accent, #74e2bd);
+  color: #07100d;
+  outline: none;
+}
+
+.load-more-btn:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+@media (min-width: 1400px) {
+  #section-trending .genre-results-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  #section-trending .genre-results-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #section-trending .genre-results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

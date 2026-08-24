@@ -21,6 +21,9 @@ function readStoredList(key) {
 let watchlist = readStoredList('fixoracine_watchlist');
 let continueWatchingList = readStoredList('fixoracine_continue_watching');
 let itemsCache = {};
+let activeGenreId = null;
+let genrePage = 1;
+let genreItems = [];
 
 // Restore persisted items into the cache so My List and Continue Watching
 // remain usable after a page refresh.
@@ -55,6 +58,7 @@ const continueCarousel = document.getElementById('continue-carousel');
 const trendingCarousel = document.getElementById('trending-carousel');
 const moviesCarousel = document.getElementById('movies-carousel');
 const tvCarousel = document.getElementById('tv-carousel');
+const loadMoreGenreBtn = document.getElementById('load-more-genre-btn');
 
 // Detail Modal
 const detailOverlay = document.getElementById('detail-modal-overlay');
@@ -220,34 +224,64 @@ async function populateGenres() {
   }
 }
 
+async function loadGenrePage(reset = false) {
+  if (!activeGenreId) return;
+  if (reset) {
+    genrePage = 1;
+    genreItems = [];
+  }
+
+  try {
+    const res = await fetch(`${BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${activeGenreId}&sort_by=popularity.desc&page=${genrePage}`);
+    if (!res.ok) throw new Error(`Genre request failed with status ${res.status}`);
+    const data = await res.json();
+    const results = (data.results || []).map(i => formatItem(i, 'movie'));
+    genreItems = reset ? results : [...genreItems, ...results];
+
+    if (genreItems.length > 0 && reset) setHero(genreItems[0]);
+    trendingCarousel.classList.add('genre-results-grid');
+    renderCarousel(trendingCarousel, genreItems);
+    loadMoreGenreBtn.style.display = data.total_pages && genrePage < data.total_pages ? 'inline-flex' : 'none';
+  } catch (err) {
+    console.error("Genre Filter Fetch Error:", err);
+    trendingCarousel.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">Unable to load this genre. Please try again.</p>';
+    loadMoreGenreBtn.style.display = 'none';
+  }
+}
+
 genreSelectHeader.addEventListener('change', async (e) => {
   const genreId = e.target.value;
   const selectedGenreName = genreSelectHeader.options[genreSelectHeader.selectedIndex].text;
-  
   if (!genreId) return;
 
   closeMobileMenu();
+  activeGenreId = genreId;
   document.getElementById('section-movies').style.display = 'none';
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
   document.getElementById('trending-label').textContent = `Genre: ${selectedGenreName}`;
-
-  try {
-    const res = await fetch(`${BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreId}&sort_by=popularity.desc`);
-    const data = await res.json();
-    const results = (data.results || []).map(i => formatItem(i, 'movie'));
-
-    if (results.length > 0) setHero(results[0]);
-    renderCarousel(trendingCarousel, results);
-  } catch (err) {
-    console.error("Genre Filter Fetch Error:", err);
-  }
+  await loadGenrePage(true);
 });
+
+if (loadMoreGenreBtn) {
+  loadMoreGenreBtn.addEventListener('click', async () => {
+    loadMoreGenreBtn.disabled = true;
+    loadMoreGenreBtn.innerHTML = 'Loading…';
+    genrePage += 1;
+    await loadGenrePage(false);
+    loadMoreGenreBtn.disabled = false;
+    loadMoreGenreBtn.textContent = 'More Movies';
+  });
+}
 
 /* ==========================================================================
    APP INIT & CATEGORY LOADING
    ========================================================================== */
 async function init() {
+  activeGenreId = null;
+  genreItems = [];
+  trendingCarousel.classList.remove('genre-results-grid');
+  if (loadMoreGenreBtn) loadMoreGenreBtn.style.display = 'none';
   document.getElementById('section-movies').style.display = 'block';
   document.getElementById('section-tv').style.display = 'block';
   document.getElementById('trending-label').textContent = 'Trending Now';
@@ -274,6 +308,10 @@ async function init() {
 }
 
 async function loadCategory(type) {
+  activeGenreId = null;
+  genreItems = [];
+  trendingCarousel.classList.remove('genre-results-grid');
+  if (loadMoreGenreBtn) loadMoreGenreBtn.style.display = 'none';
   document.getElementById('section-movies').style.display = 'none';
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
