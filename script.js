@@ -129,6 +129,27 @@ function getQualityCssClass(qualityTag) {
   }
 }
 
+function iconSvg(name, size = 16) {
+  const paths = {
+    star: '<path d="m12 3 2.78 5.63 6.22.9-4.5 4.38 1.06 6.2L12 17.18 6.44 20.1l1.06-6.2L3 9.53l6.22-.9L12 3Z"/>',
+    play: '<path d="m8 5 11 7-11 7V5Z"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    heart: '<path d="M20.84 8.61a5.5 5.5 0 0 0-7.78 0L12 9.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/>',
+    chevronDown: '<path d="m6 9 6 6 6-6"/>',
+    x: '<path d="m6 6 12 12M18 6 6 18"/>',
+    search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/>',
+    flame: '<path d="M12 21c4.2 0 7-2.8 7-6.5 0-2.5-1.25-4.55-3.3-6.3.12 1.7-.42 2.8-1.7 3.7.1-3.8-1.7-6.35-4.3-8.9.15 3.1-2.7 5.3-3.7 8.25C4.8 15 6.95 21 12 21Z"/>',
+    film: '<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 5v14M16 5v14M4 9h4M16 9h4M4 15h4M16 15h4"/>',
+    tv: '<rect x="3" y="5" width="18" height="13" rx="2"/><path d="m8 2 4 3 4-3"/>',
+    compass: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.1 4.9-4.9 2.1 2.1-4.9 4.9-2.1Z"/>',
+    bookmark: '<path d="M6 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18l-6-3-6 3V4Z"/>',
+    check: '<path d="m5 12 4.2 4.2L19 6.5"/>',
+    pin: '<path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/>',
+    tvPlay: '<rect x="3" y="5" width="18" height="13" rx="2"/><path d="m10 9 5 2.5-5 2.5V9Z"/>'
+  };
+  return `<svg class="ui-icon ui-icon-${name}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.compass}</svg>`;
+}
+
 /* ==========================================================================
    TMDB API FETCHERS & FORMATTING
    ========================================================================== */
@@ -209,7 +230,7 @@ genreSelectHeader.addEventListener('change', async (e) => {
   document.getElementById('section-movies').style.display = 'none';
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
-  document.getElementById('trending-label').textContent = `🎭 Genre: ${selectedGenreName}`;
+  document.getElementById('trending-label').textContent = `Genre: ${selectedGenreName}`;
 
   try {
     const res = await fetch(`${BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreId}&sort_by=popularity.desc`);
@@ -229,7 +250,7 @@ genreSelectHeader.addEventListener('change', async (e) => {
 async function init() {
   document.getElementById('section-movies').style.display = 'block';
   document.getElementById('section-tv').style.display = 'block';
-  document.getElementById('trending-label').textContent = '🔥 Trending Now';
+  document.getElementById('trending-label').textContent = 'Trending Now';
   genreSelectHeader.value = "";
 
   renderContinueWatching();
@@ -259,7 +280,7 @@ async function loadCategory(type) {
   genreSelectHeader.value = "";
   
   const endpoint = type === 'movie' ? '/movie/top_rated' : '/tv/top_rated';
-  document.getElementById('trending-label').textContent = type === 'movie' ? '🎬 Top Rated Movies' : '📺 Top Rated TV Shows';
+  document.getElementById('trending-label').textContent = type === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows';
 
   const rawItems = await fetchFromTMDB(endpoint);
   const items = rawItems.map(i => formatItem(i, type));
@@ -272,7 +293,7 @@ function setHero(item) {
   currentItem = item;
   heroBanner.style.backgroundImage = `url('${item.backdrop}')`;
   heroTitle.textContent = item.title;
-  heroRating.textContent = `★ ${item.rating}`;
+  heroRating.innerHTML = `${iconSvg('star', 15)} <span>${item.rating}</span>`;
   heroMatch.textContent = `${item.matchScore}% Match`;
 
   // Apply real quality badge and styling
@@ -308,15 +329,15 @@ function renderCarousel(container, items) {
         <div class="card-info">
           <div class="card-actions">
             <div class="action-btns-left">
-              <button class="icon-btn icon-btn-play" title="Play" aria-label="Play" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">▶</button>
-              <button class="icon-btn" title="Add to List" onclick="event.stopPropagation(); toggleWatchlist(itemsCache[${item.id}], this)">+</button>
-              <button class="icon-btn" title="Like" aria-label="Like">♡</button>
+              <button class="icon-btn icon-btn-play" title="Play" aria-label="Play" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">${iconSvg('play', 15)}</button>
+              <button class="icon-btn" title="Add to List" aria-label="Add to My List" onclick="event.stopPropagation(); toggleWatchlist(itemsCache[${item.id}], this)">${iconSvg('plus', 15)}</button>
+              <button class="icon-btn" title="Like" aria-label="Like">${iconSvg('heart', 15)}</button>
             </div>
-            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
+            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">${iconSvg('chevronDown', 15)}</button>
           </div>
           <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
-            <span class="star-rating">★ ${item.rating}</span>
+            <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
             <span class="card-year">${item.year}</span>
             <span class="age-badge">${item.matchScore}% Match</span>
             <span class="quality-badge ${qClass}">${item.quality}</span>
@@ -377,15 +398,15 @@ function renderContinueWatching() {
         <div class="card-info">
           <div class="card-actions">
             <div class="action-btns-left">
-              <button class="icon-btn icon-btn-play" title="Resume" aria-label="Resume" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">▶</button>
-              <button class="icon-btn" title="Remove" aria-label="Remove from Continue Watching" onclick="event.stopPropagation(); removeFromContinueWatching(${item.id})">×</button>
+              <button class="icon-btn icon-btn-play" title="Resume" aria-label="Resume" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">${iconSvg('play', 15)}</button>
+              <button class="icon-btn" title="Remove" aria-label="Remove from Continue Watching" onclick="event.stopPropagation(); removeFromContinueWatching(${item.id})">${iconSvg('x', 15)}</button>
             </div>
-            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">⌄</button>
+            <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">${iconSvg('chevronDown', 15)}</button>
           </div>
           <div class="card-title" title="${item.title}">${item.title}</div>
           <div class="card-meta">
             <span class="continue-badge">${metaText}</span>
-            <span class="star-rating">★ ${item.rating}</span>
+            <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
             <span class="card-year">${item.year}</span>
           </div>
         </div>
@@ -405,7 +426,7 @@ function showContinueWatchingPage() {
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
   genreSelectHeader.value = "";
-  document.getElementById('trending-label').textContent = '▶ Continue Watching';
+  document.getElementById('trending-label').textContent = 'Continue Watching';
 
   renderCarousel(trendingCarousel, continueWatchingList);
 }
@@ -420,7 +441,7 @@ async function openDetailModal(id) {
   currentItem = item;
   detailHero.style.backgroundImage = `url('${item.backdrop}')`;
   detailTitle.textContent = item.title;
-  detailRating.textContent = `★ ${item.rating}`;
+  detailRating.innerHTML = `${iconSvg('star', 15)} <span>${item.rating}</span>`;
   detailMatch.textContent = `${item.matchScore}% Match`;
   detailYear.textContent = item.year;
   
@@ -477,7 +498,7 @@ async function loadSimilarContent(id, type) {
           <div class="similar-info">
             <div class="similar-title">${item.title}</div>
             <div class="similar-meta">
-              <span class="star-rating">★ ${item.rating}</span>
+              <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
               <span class="year-tag">${item.year}</span>
             </div>
             <div class="similar-overview">${item.overview}</div>
@@ -526,7 +547,7 @@ async function loadTVEpisodes(tvId, seasonNum) {
           <div class="episode-num">${ep.episode_number}</div>
           <div class="episode-thumb-wrapper">
             <img src="${epThumb}" alt="${ep.name}" class="episode-thumb">
-            <div class="episode-play-icon">▶</div>
+            <div class="episode-play-icon">${iconSvg('play', 18)}</div>
           </div>
           <div class="episode-details">
             <div class="episode-top-row">
@@ -587,7 +608,7 @@ searchInput.addEventListener('input', (e) => {
             <img src="${item.poster}" class="prediction-thumb" alt="${item.title}">
             <div class="prediction-info">
               <span class="prediction-title">${item.title}</span>
-              <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ★ ${item.rating} • ${item.quality}</span>
+              <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ${iconSvg('star', 12)} ${item.rating} • ${item.quality}</span>
             </div>
           </div>
         `).join('');
@@ -623,7 +644,7 @@ async function performFullSearch(query) {
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
   genreSelectHeader.value = "";
-  document.getElementById('trending-label').textContent = `🔍 Results for "${query}"`;
+  document.getElementById('trending-label').textContent = `Results for "${query}"`;
 
   try {
     const res = await fetch(`${BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
@@ -734,9 +755,9 @@ function updateWatchlistBtnUI(btnElement, item) {
   if (!btnElement || !item) return;
   const inList = watchlist.some(i => i.id === item.id);
   if (btnElement.classList.contains('icon-btn') || btnElement.classList.contains('btn-circle-action')) {
-    btnElement.textContent = inList ? "✓" : "+";
+    btnElement.innerHTML = inList ? iconSvg('check', 16) : iconSvg('plus', 16);
   } else {
-    btnElement.textContent = inList ? "✓ In My List" : "+ My List";
+    btnElement.innerHTML = inList ? `${iconSvg('check', 16)} <span>In My List</span>` : `${iconSvg('plus', 16)} <span>My List</span>`;
   }
   btnElement.onclick = (e) => {
     e.stopPropagation();
@@ -752,7 +773,7 @@ function showWatchlist() {
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
   genreSelectHeader.value = "";
-  document.getElementById('trending-label').textContent = '📌 My List';
+  document.getElementById('trending-label').textContent = 'My List';
 
   renderCarousel(trendingCarousel, watchlist);
 }

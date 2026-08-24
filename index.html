@@ -35,7 +35,7 @@
     <div class="nav-right">
       <div class="search-box">
         <div class="search-input-wrapper">
-          <span class="search-icon" aria-hidden="true">⌕</span>
+          <span class="search-icon" aria-hidden="true"><svg class="ui-icon ui-icon-search" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg></span>
           <input type="text" id="search-input" class="search-input" placeholder="Search titles..." autocomplete="off">
         </div>
         <div class="search-predictions" id="search-predictions"></div>
@@ -51,7 +51,7 @@
       <span class="hero-badge" id="hero-badge">Featured</span>
       <h1 class="hero-title" id="hero-title">Featured title</h1>
       <div class="hero-meta">
-        <span class="rating" id="hero-rating">★ 0.0</span>
+        <span class="rating" id="hero-rating"><svg class="ui-icon ui-icon-star" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.78 5.63 6.22.9-4.5 4.38 1.06 6.2L12 17.18 6.44 20.1l1.06-6.2L3 9.53l6.22-.9L12 3Z"/></svg><span>0.0</span></span>
         <span class="match-score" id="hero-match">98% Match</span>
         <span id="hero-quality" class="quality-tag quality-badge">HD</span>
         <span id="hero-year">----</span>
@@ -59,7 +59,7 @@
       </div>
       <p class="hero-overview" id="hero-overview">Discover your next favorite movie or series.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary" id="hero-play-btn">▶ Play</button>
+        <button class="btn btn-primary" id="hero-play-btn"><svg class="ui-icon ui-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg> Play</button>
         <button class="btn btn-secondary" id="hero-list-btn" onclick="event.stopPropagation(); openDetailModal(currentItem.id)">More Info</button>
       </div>
     </div>
@@ -108,7 +108,7 @@
   <!-- DETAIL MODAL -->
   <div class="modal-overlay" id="detail-modal-overlay">
     <div class="detail-modal">
-      <button class="close-detail-btn" id="close-detail-modal" title="Close" aria-label="Close details">&times;</button>
+      <button class="close-detail-btn" id="close-detail-modal" title="Close" aria-label="Close details"><svg class="ui-icon ui-icon-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
       
       <div class="detail-hero" id="detail-hero">
         <div class="detail-hero-overlay"></div>
@@ -116,10 +116,10 @@
           <h2 class="detail-title" id="detail-title">Movie details</h2>
           <div class="detail-actions-bar">
             <button class="btn-brand-play" id="detail-play-btn">
-              <span>▶</span> Play
+              <svg class="ui-icon ui-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg> Play
             </button>
-            <button class="btn-circle-action" id="detail-list-btn" title="Add to My List" aria-label="Add to My List">+</button>
-            <button class="btn-circle-action" title="I like this" aria-label="Like this title">♡</button>
+            <button class="btn-circle-action" id="detail-list-btn" title="Add to My List" aria-label="Add to My List"><svg class="ui-icon ui-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            <button class="btn-circle-action" title="I like this" aria-label="Like this title"><svg class="ui-icon ui-icon-heart" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 8.61a5.5 5.5 0 0 0-7.78 0L12 9.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
       <div class="detail-body-grid">
         <div>
           <div class="detail-meta-row">
-            <span class="rating" id="detail-rating">⭐ 0.0</span>
+            <span class="rating" id="detail-rating"><svg class="ui-icon ui-icon-star" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.78 5.63 6.22.9-4.5 4.38 1.06 6.2L12 17.18 6.44 20.1l1.06-6.2L3 9.53l6.22-.9L12 3Z"/></svg><span>0.0</span></span>
             <span class="match-score" id="detail-match">98% Match</span>
             <span class="year-tag" id="detail-year">2024</span>
             <span class="age-rating-badge">16+</span>
@@ -174,7 +174,7 @@
     <div class="player-modal">
       <div class="modal-header">
         <div class="modal-title-text" id="modal-movie-title">Stream Content</div>
-        <button class="close-detail-btn" id="close-player-modal" title="Close player" aria-label="Close player" style="top: 0.6rem; right: 0.8rem;">&times;</button>
+        <button class="close-detail-btn" id="close-player-modal" title="Close player" aria-label="Close player" style="top: 0.6rem; right: 0.8rem;"><svg class="ui-icon ui-icon-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
       </div>
       
       <div class="player-container">

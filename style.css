@@ -4220,3 +4220,66 @@ header .brand:hover::before {
     height: 7px;
   }
 }
+
+
+/* Inline SVG icon system: replaces emoji and text glyphs without changing behavior. */
+.ui-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  vertical-align: middle;
+  color: currentColor;
+}
+
+.rating .ui-icon,
+.star-rating .ui-icon {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.rating,
+.star-rating,
+.prediction-meta,
+.search-icon,
+.btn,
+.btn-brand-play,
+.btn-circle-action,
+.icon-btn,
+.episode-play-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+}
+
+.icon-btn .ui-icon,
+.btn-circle-action .ui-icon,
+.close-detail-btn .ui-icon,
+.search-icon .ui-icon {
+  pointer-events: none;
+}
+
+.section-title span::before,
+#section-continue .section-title span::before,
+#section-trending .section-title span::before,
+#section-movies .section-title span::before,
+#section-tv .section-title span::before {
+  content: '';
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: var(--ui-accent, #74e2bd);
+  box-shadow: 0 0 12px rgba(116, 226, 189, 0.58);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .section-title span::before,
+  #section-continue .section-title span::before,
+  #section-trending .section-title span::before,
+  #section-movies .section-title span::before,
+  #section-tv .section-title span::before {
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-right: 0.42rem;
+  }
+}
