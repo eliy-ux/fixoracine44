@@ -4598,3 +4598,65 @@ header .brand:hover::before {
 .movie-card .card-actions .icon-btn:focus-visible {
   transform: none !important;
 }
+
+
+/* Definitive no-growth state: hover changes visibility only, never card footprint. */
+.carousel .movie-card,
+.carousel .movie-card:hover,
+.carousel .movie-card:focus-within,
+.carousel .movie-card:first-child,
+.carousel .movie-card:first-child:hover {
+  width: 154px !important;
+  min-width: 154px !important;
+  max-width: 154px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transform: none !important;
+}
+
+.carousel .movie-card:hover .card-info,
+.carousel .movie-card:focus-within .card-info,
+.carousel .movie-card:first-child:hover .card-info {
+  max-height: none !important;
+  height: auto !important;
+  padding: 0.68rem 0.78rem 0.78rem !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.carousel .movie-card:hover .card-actions,
+.carousel .movie-card:focus-within .card-actions,
+.carousel .movie-card:first-child:hover .card-actions {
+  max-height: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+.carousel .movie-card:hover .card-title,
+.carousel .movie-card:focus-within .card-title,
+.carousel .movie-card:first-child:hover .card-title {
+  height: 1.05rem !important;
+  max-height: 1.05rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.carousel .movie-card:hover .poster-img,
+.carousel .movie-card:focus-within .poster-img,
+.carousel .movie-card:first-child:hover .poster-img {
+  transform: none !important;
+}
+
+.carousel .card-hover-play,
+.carousel .movie-card:hover .card-hover-play,
+.carousel .movie-card:focus-within .card-hover-play {
+  transform: translate(-50%, -50%) !important;
+}
