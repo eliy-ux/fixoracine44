@@ -4733,3 +4733,85 @@ header .brand:hover::before {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* Readable Netflix poster proportions: larger cards, fixed footprint, no hover growth. */
+.carousel:not(.genre-results-grid) .movie-card,
+.carousel:not(.genre-results-grid) .movie-card:hover,
+.carousel:not(.genre-results-grid) .movie-card:focus-within {
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  transform: none !important;
+}
+
+.carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
+  width: 100% !important;
+  height: 314px !important;
+  aspect-ratio: 2 / 3;
+}
+
+#section-trending .genre-results-grid .movie-card .poster-wrapper {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3;
+}
+
+.carousel .movie-card .card-info {
+  padding: 0.8rem 0.88rem 0.9rem !important;
+}
+
+.carousel .movie-card .card-title {
+  font-size: 0.88rem !important;
+  line-height: 1.3 !important;
+}
+
+.carousel .movie-card .card-meta {
+  font-size: 0.73rem !important;
+  line-height: 1.35 !important;
+}
+
+.carousel .movie-card .card-hover-play {
+  width: 58px;
+  height: 58px;
+}
+
+@media (max-width: 960px) {
+  .carousel:not(.genre-results-grid) .movie-card,
+  .carousel:not(.genre-results-grid) .movie-card:hover,
+  .carousel:not(.genre-results-grid) .movie-card:focus-within {
+    width: 194px !important;
+    min-width: 194px !important;
+    max-width: 194px !important;
+  }
+
+  .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
+    height: 278px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel:not(.genre-results-grid) .movie-card,
+  .carousel:not(.genre-results-grid) .movie-card:hover,
+  .carousel:not(.genre-results-grid) .movie-card:focus-within {
+    width: 166px !important;
+    min-width: 166px !important;
+    max-width: 166px !important;
+  }
+
+  .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
+    height: 238px !important;
+  }
+
+  .carousel .movie-card .card-info {
+    padding: 0.65rem 0.7rem 0.76rem !important;
+  }
+
+  .carousel .movie-card .card-title {
+    font-size: 0.78rem !important;
+  }
+
+  .carousel .movie-card .card-meta {
+    font-size: 0.67rem !important;
+  }
+}
