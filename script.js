@@ -325,6 +325,7 @@ function renderCarousel(container, items) {
         <div class="poster-wrapper">
           <span class="brand-badge ${qClass}">${item.quality}</span>
           <img src="${item.poster}" alt="${item.title}" class="poster-img" loading="lazy">
+          <button class="card-hover-play" title="Play ${item.title}" aria-label="Play ${item.title}" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">${iconSvg('play', 20)}</button>
         </div>
         <div class="card-info">
           <div class="card-actions">
@@ -391,6 +392,7 @@ function renderContinueWatching() {
         <div class="poster-wrapper">
           <span class="brand-badge ${qClass}">${item.quality}</span>
           <img src="${item.poster}" alt="${item.title}" class="poster-img" loading="lazy">
+          <button class="card-hover-play" title="Resume ${item.title}" aria-label="Resume ${item.title}" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">${iconSvg('play', 20)}</button>
           <div class="progress-bar-container">
             <div class="progress-bar" style="width: ${item.progress || 50}%;"></div>
           </div>
