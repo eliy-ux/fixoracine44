@@ -4571,3 +4571,30 @@ header .brand:hover::before {
     transform: none;
   }
 }
+
+
+/* Final fixed-size rule: no card or poster scaling on hover. */
+.movie-card,
+.movie-card:hover,
+.movie-card:focus-within,
+.movie-card:first-child:hover {
+  transform: none !important;
+}
+
+.movie-card:hover .poster-img,
+.movie-card:focus-within .poster-img,
+.movie-card:first-child:hover .poster-img {
+  transform: none !important;
+  filter: brightness(0.72) saturate(1.08);
+}
+
+.card-hover-play,
+.movie-card:hover .card-hover-play,
+.movie-card:focus-within .card-hover-play {
+  transform: translate(-50%, -50%) !important;
+}
+
+.movie-card .card-actions .icon-btn:hover,
+.movie-card .card-actions .icon-btn:focus-visible {
+  transform: none !important;
+}
