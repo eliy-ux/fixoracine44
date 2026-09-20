@@ -194,7 +194,7 @@ function formatItem(rawItem, forceType = null) {
     year: year,
     quality: quality,
     duration: type === 'tv' ? '1 Season' : '2h 12m',
-    poster: rawItem.backdrop_path ? `${POSTER_BASE_URL}${rawItem.backdrop_path}` : (rawItem.poster_path ? `${POSTER_BASE_URL}${rawItem.poster_path}` : 'https://via.placeholder.com/500x281?text=No+Image'),
+    poster: rawItem.poster_path ? `${POSTER_BASE_URL}${rawItem.poster_path}` : (rawItem.backdrop_path ? `${POSTER_BASE_URL}${rawItem.backdrop_path}` : 'https://via.placeholder.com/500x750?text=No+Image'),
     backdrop: rawItem.backdrop_path ? `${IMG_BASE_URL}${rawItem.backdrop_path}` : 'https://via.placeholder.com/1200x600?text=No+Image',
     overview: rawItem.overview || 'No overview available for this title.'
   };
@@ -378,8 +378,7 @@ function renderCarousel(container, items) {
           <div class="card-meta">
             <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
             <span class="card-year">${item.year}</span>
-            <span class="age-badge">${item.matchScore}% Match</span>
-            <span class="quality-badge ${qClass}">${item.quality}</span>
+            <span class="card-type">${item.type === 'tv' ? 'Series' : 'Movie'}</span>
           </div>
         </div>
       </div>

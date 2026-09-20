@@ -447,6 +447,27 @@ main {
   position: relative;
 }
 
+.carousel-container::before,
+.carousel-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2.5rem;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.carousel-container::before {
+  left: -1px;
+  background: linear-gradient(90deg, var(--bg-main), transparent);
+}
+
+.carousel-container::after {
+  right: -1px;
+  background: linear-gradient(270deg, var(--bg-main), transparent);
+}
+
 .carousel {
   display: flex;
   gap: 1rem;
@@ -4427,6 +4448,12 @@ header .brand:hover::before {
   color: var(--ui-accent, #74e2bd);
 }
 
+.movie-card .card-type {
+  color: rgba(240, 253, 248, 0.48);
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+}
+
 @media (hover: none), (max-width: 600px) {
   .movie-card {
     min-width: 138px;
@@ -4791,6 +4818,11 @@ header .brand:hover::before {
 }
 
 @media (max-width: 600px) {
+  .carousel-container::before,
+  .carousel-container::after {
+    width: 1rem;
+  }
+
   .carousel:not(.genre-results-grid) .movie-card,
   .carousel:not(.genre-results-grid) .movie-card:hover,
   .carousel:not(.genre-results-grid) .movie-card:focus-within {
