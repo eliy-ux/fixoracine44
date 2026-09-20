@@ -4766,15 +4766,15 @@ header .brand:hover::before {
 .carousel:not(.genre-results-grid) .movie-card,
 .carousel:not(.genre-results-grid) .movie-card:hover,
 .carousel:not(.genre-results-grid) .movie-card:focus-within {
-  width: 204px !important;
-  min-width: 204px !important;
-  max-width: 204px !important;
+  width: 186px !important;
+  min-width: 186px !important;
+  max-width: 186px !important;
   transform: none !important;
 }
 
 .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
   width: 100% !important;
-  height: 270px !important;
+  height: 248px !important;
   aspect-ratio: 2 / 3;
 }
 
@@ -4807,13 +4807,13 @@ header .brand:hover::before {
   .carousel:not(.genre-results-grid) .movie-card,
   .carousel:not(.genre-results-grid) .movie-card:hover,
   .carousel:not(.genre-results-grid) .movie-card:focus-within {
-    width: 182px !important;
-    min-width: 182px !important;
-    max-width: 182px !important;
+    width: 166px !important;
+    min-width: 166px !important;
+    max-width: 166px !important;
   }
 
   .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
-    height: 240px !important;
+    height: 222px !important;
   }
 }
 
@@ -4826,13 +4826,13 @@ header .brand:hover::before {
   .carousel:not(.genre-results-grid) .movie-card,
   .carousel:not(.genre-results-grid) .movie-card:hover,
   .carousel:not(.genre-results-grid) .movie-card:focus-within {
-    width: 154px !important;
-    min-width: 154px !important;
-    max-width: 154px !important;
+    width: 142px !important;
+    min-width: 142px !important;
+    max-width: 142px !important;
   }
 
   .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
-    height: 204px !important;
+    height: 190px !important;
   }
 
   .carousel .movie-card .card-info {
