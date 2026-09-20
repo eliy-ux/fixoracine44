@@ -258,6 +258,24 @@ header .brand::after {
   box-shadow: 8px 0 0 #062018, 0 8px 0 #062018, 8px 8px 0 #062018;
 }
 
+header .brand::before,
+header .brand::after {
+  display: none;
+}
+
+header .brand-logo {
+  display: block;
+  width: 38px;
+  height: 34px;
+  margin-right: .5rem;
+  object-fit: cover;
+  object-position: left center;
+  border-radius: 9px;
+  filter: drop-shadow(0 7px 14px rgba(210, 54, 24, .3));
+}
+
+header .brand-name { display: inline-flex; align-items: baseline; }
+
 header .nav-links { min-width: 0; overflow: hidden; }
 header .nav-links li { flex: 0 0 auto; }
 header .nav-links a { white-space: nowrap; }
@@ -287,17 +305,16 @@ header .profile-button { width: 36px; height: 36px; font-size: .58rem; }
     border-radius: 0 0 16px 16px;
   }
 
-  header .brand { padding-left: 38px; font-size: 1.08rem; }
-  header .brand::before { width: 29px; height: 29px; border-radius: 9px 9px 9px 3px; }
-  header .brand::after { left: 11px; width: 7px; height: 7px; box-shadow: 7px 0 0 #062018, 0 7px 0 #062018, 7px 7px 0 #062018; }
+  header .brand { padding-left: 0; font-size: 1.08rem; }
+  header .brand-logo { width: 32px; height: 29px; margin-right: .4rem; border-radius: 7px; }
   header .nav-right { margin-left: auto; }
   header .search-box { flex: 0 1 170px; }
   header .search-input-wrapper { min-width: 0; width: 100%; }
 }
 
 @media (max-width: 480px) {
-  header .brand { font-size: 0; }
-  header .brand span { display: none; }
+  header .brand-name { display: none; }
+  header .brand-logo { width: 34px; height: 30px; margin-right: 0; }
   header .search-box { max-width: 164px; }
 }
 
