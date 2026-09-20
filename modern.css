@@ -356,8 +356,17 @@ header.scrolled {
   opacity: 1;
 }
 
-header .nav-links a:hover:not(.active) {
-  border-color: transparent;
-  background: transparent;
-  color: rgba(243, 255, 249, .62);
+header .nav-links a:hover:not(.active),
+header .nav-links a:focus-visible:not(.active) {
+  border-color: transparent !important;
+  background: transparent !important;
+  color: rgba(243, 255, 249, .62) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+header .nav-links a:not(.active)::after,
+header .nav-links a:not(.active):hover::after,
+header .nav-links a:not(.active):focus-visible::after {
+  display: none !important;
 }
