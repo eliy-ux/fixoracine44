@@ -355,3 +355,9 @@ header.scrolled {
 .carousel-container.is-scrollable .carousel-arrow:not(:disabled) {
   opacity: 1;
 }
+
+header .nav-links a:hover:not(.active) {
+  border-color: transparent;
+  background: transparent;
+  color: rgba(243, 255, 249, .62);
+}
