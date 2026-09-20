@@ -4774,7 +4774,7 @@ header .brand:hover::before {
 
 .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
   width: 100% !important;
-  height: 291px !important;
+  height: 270px !important;
   aspect-ratio: 2 / 3;
 }
 
@@ -4813,7 +4813,7 @@ header .brand:hover::before {
   }
 
   .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
-    height: 260px !important;
+    height: 240px !important;
   }
 }
 
@@ -4832,7 +4832,7 @@ header .brand:hover::before {
   }
 
   .carousel:not(.genre-results-grid) .movie-card .poster-wrapper {
-    height: 220px !important;
+    height: 204px !important;
   }
 
   .carousel .movie-card .card-info {
