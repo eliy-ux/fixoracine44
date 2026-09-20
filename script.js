@@ -262,6 +262,7 @@ async function loadGenrePage(reset = false) {
   }
 
   try {
+    if (reset) renderLoadingState(trendingCarousel);
     const res = await fetch(`${BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${activeGenreId}&sort_by=popularity.desc&page=${genrePage}`);
     if (!res.ok) throw new Error(`Genre request failed with status ${res.status}`);
     const data = await res.json();
@@ -318,6 +319,9 @@ async function init() {
   genreSelectHeader.value = "";
 
   renderContinueWatching();
+  renderLoadingState(trendingCarousel);
+  renderLoadingState(moviesCarousel);
+  renderLoadingState(tvCarousel);
   await populateGenres();
 
   const [trendingRaw, moviesRaw, tvRaw] = await Promise.all([
@@ -350,6 +354,7 @@ async function loadCategory(type) {
   const endpoint = type === 'movie' ? '/movie/top_rated' : '/tv/top_rated';
   document.getElementById('trending-label').textContent = type === 'movie' ? 'Top Rated Movies' : 'Top Rated TV Shows';
 
+  renderLoadingState(trendingCarousel);
   const rawItems = await fetchFromTMDB(endpoint);
   const items = rawItems.map(i => formatItem(i, type));
 
@@ -382,9 +387,12 @@ function setHero(item) {
 
 function renderCarousel(container, items) {
   if (items.length === 0) {
-    container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No items found.</p>';
+    container.classList.add('is-empty');
+    container.innerHTML = `<div class="empty-state"><span class="empty-state-icon">${iconSvg('film', 22)}</span><strong>No titles found</strong><span>Try another category or search for something new.</span></div>`;
     return;
   }
+
+  container.classList.remove('is-empty');
 
   container.innerHTML = items.map(item => {
     const qClass = getQualityCssClass(item.quality);
@@ -419,6 +427,17 @@ function renderCarousel(container, items) {
 /* ==========================================================================
    CONTINUE WATCHING LOGIC
    ========================================================================== */
+function renderLoadingState(container, count = 6) {
+  container.classList.remove('is-empty');
+  container.innerHTML = Array.from({ length: count }, () => `
+    <div class="movie-skeleton" aria-hidden="true">
+      <div class="skeleton-poster"></div>
+      <div class="skeleton-line skeleton-line-title"></div>
+      <div class="skeleton-line skeleton-line-meta"></div>
+    </div>
+  `).join('');
+}
+
 function recordContinueWatching(item, season = 1, episode = 1) {
   if (!item) return;
 

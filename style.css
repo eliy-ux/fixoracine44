@@ -4905,3 +4905,95 @@ header .brand:hover::before {
     font-size: 0.67rem !important;
   }
 }
+
+/* Final catalog polish: keep overlays behind controls and prevent Continue Watching collisions. */
+.section .carousel-container::after {
+  z-index: 2;
+}
+
+#section-continue .carousel-container {
+  min-height: 0;
+}
+
+#section-continue .carousel-container::before {
+  content: none;
+}
+
+.movie-skeleton {
+  flex: 0 0 186px;
+  min-width: 186px;
+  overflow: hidden;
+  border: 1px solid rgba(225, 255, 245, 0.08);
+  border-radius: 10px;
+  background: rgba(22, 35, 32, 0.72);
+}
+
+.skeleton-poster {
+  height: 248px;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.04) 8%, rgba(255, 255, 255, 0.12) 18%, rgba(255, 255, 255, 0.04) 33%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.35s linear infinite;
+}
+
+.skeleton-line {
+  height: 9px;
+  margin: 0.7rem 0.75rem 0;
+  border-radius: 999px;
+  background: rgba(225, 255, 245, 0.1);
+  background-image: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.1) 50%, transparent 80%);
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.35s linear infinite;
+}
+
+.skeleton-line-meta {
+  width: 52%;
+  margin-bottom: 0.85rem;
+}
+
+.empty-state {
+  display: flex;
+  flex: 1 1 100%;
+  min-height: 150px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px dashed rgba(225, 255, 245, 0.14);
+  border-radius: 12px;
+  color: rgba(225, 255, 245, 0.5);
+  text-align: center;
+}
+
+.empty-state strong {
+  color: #e9fff6;
+  font-size: 0.9rem;
+}
+
+.empty-state > span:last-child {
+  font-size: 0.74rem;
+}
+
+.empty-state-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(116, 226, 189, 0.28);
+  border-radius: 50%;
+  color: var(--ui-accent, #74e2bd);
+}
+
+@keyframes skeleton-shimmer {
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 600px) {
+  .movie-skeleton {
+    flex-basis: 142px;
+    min-width: 142px;
+  }
+
+  .skeleton-poster {
+    height: 190px;
+  }
+}
