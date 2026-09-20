@@ -397,13 +397,26 @@ function renderCarousel(container, items) {
   container.innerHTML = items.map(item => {
     const qClass = getQualityCssClass(item.quality);
     return `
-      <div class="movie-card" onclick="openDetailModal(${item.id})">
+      <article class="movie-card" data-media-id="${item.id}" data-media-type="${item.type}" onclick="openDetailModal(${item.id})">
         <div class="poster-wrapper">
-          <span class="brand-badge ${qClass}">${item.quality}</span>
           <img src="${item.poster}" alt="${item.title}" class="poster-img" loading="lazy">
+          <div class="card-poster-shade" aria-hidden="true"></div>
+          <div class="card-topline">
+            <span class="brand-badge ${qClass}">${item.quality}</span>
+            <span class="card-type-pill">${item.type === 'tv' ? 'Series' : 'Movie'}</span>
+          </div>
           <button class="card-hover-play" title="Play ${item.title}" aria-label="Play ${item.title}" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">${iconSvg('play', 20)}</button>
+          <span class="card-poster-label">${item.year}</span>
         </div>
         <div class="card-info">
+          <div class="card-heading-row">
+            <div class="card-title" title="${item.title}">${item.title}</div>
+            <span class="card-rating"><span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span></span>
+          </div>
+          <div class="card-meta">
+            <span class="card-type">${item.type === 'tv' ? 'TV series' : 'Feature film'}</span>
+            <span class="card-year">${item.year}</span>
+          </div>
           <div class="card-actions">
             <div class="action-btns-left">
               <button class="icon-btn icon-btn-play" title="Play" aria-label="Play" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}])">${iconSvg('play', 15)}</button>
@@ -412,14 +425,8 @@ function renderCarousel(container, items) {
             </div>
             <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">${iconSvg('chevronDown', 15)}</button>
           </div>
-          <div class="card-title" title="${item.title}">${item.title}</div>
-          <div class="card-meta">
-            <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
-            <span class="card-year">${item.year}</span>
-            <span class="card-type">${item.type === 'tv' ? 'Series' : 'Movie'}</span>
-          </div>
         </div>
-      </div>
+      </article>
     `;
   }).join('');
 }
@@ -474,16 +481,29 @@ function renderContinueWatching() {
     const qClass = getQualityCssClass(item.quality);
 
     return `
-      <div class="movie-card" onclick="openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">
+      <article class="movie-card continue-card" data-media-id="${item.id}" data-media-type="${item.type}" onclick="openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">
         <div class="poster-wrapper">
-          <span class="brand-badge ${qClass}">${item.quality}</span>
           <img src="${item.poster}" alt="${item.title}" class="poster-img" loading="lazy">
+          <div class="card-poster-shade" aria-hidden="true"></div>
+          <div class="card-topline">
+            <span class="brand-badge ${qClass}">${item.quality}</span>
+            <span class="continue-badge">${metaText}</span>
+          </div>
           <button class="card-hover-play" title="Resume ${item.title}" aria-label="Resume ${item.title}" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">${iconSvg('play', 20)}</button>
+          <span class="card-poster-label">${item.progress || 50}% watched</span>
           <div class="progress-bar-container">
             <div class="progress-bar" style="width: ${item.progress || 50}%;"></div>
           </div>
         </div>
         <div class="card-info">
+          <div class="card-heading-row">
+            <div class="card-title" title="${item.title}">${item.title}</div>
+            <span class="card-rating"><span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span></span>
+          </div>
+          <div class="card-meta">
+            <span class="card-type">${item.type === 'tv' ? 'TV series' : 'Feature film'}</span>
+            <span class="card-year">${item.year}</span>
+          </div>
           <div class="card-actions">
             <div class="action-btns-left">
               <button class="icon-btn icon-btn-play" title="Resume" aria-label="Resume" onclick="event.stopPropagation(); openPlayer(itemsCache[${item.id}], ${item.season || 1}, ${item.episode || 1})">${iconSvg('play', 15)}</button>
@@ -491,14 +511,8 @@ function renderContinueWatching() {
             </div>
             <button class="icon-btn" title="Details" aria-label="Open details" onclick="event.stopPropagation(); openDetailModal(${item.id})">${iconSvg('chevronDown', 15)}</button>
           </div>
-          <div class="card-title" title="${item.title}">${item.title}</div>
-          <div class="card-meta">
-            <span class="continue-badge">${metaText}</span>
-            <span class="star-rating">${iconSvg('star', 13)} <span>${item.rating}</span></span>
-            <span class="card-year">${item.year}</span>
-          </div>
         </div>
-      </div>
+      </article>
     `;
   }).join('');
 }
