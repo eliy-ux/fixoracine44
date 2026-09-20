@@ -60,6 +60,36 @@ const moviesCarousel = document.getElementById('movies-carousel');
 const tvCarousel = document.getElementById('tv-carousel');
 const loadMoreGenreBtn = document.getElementById('load-more-genre-btn');
 
+function setupCarouselControls() {
+  document.querySelectorAll('.carousel-container').forEach(container => {
+    const carousel = container.querySelector('.carousel');
+    if (!carousel) return;
+
+    const updateState = () => {
+      const maxScroll = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
+      container.classList.toggle('is-scrollable', maxScroll > 2);
+      const previous = container.querySelector('.carousel-arrow-prev');
+      const next = container.querySelector('.carousel-arrow-next');
+      if (previous) previous.disabled = carousel.scrollLeft <= 2;
+      if (next) next.disabled = carousel.scrollLeft >= maxScroll - 2;
+    };
+
+    container.querySelectorAll('.carousel-arrow').forEach(button => {
+      button.addEventListener('click', () => {
+        const direction = Number(button.dataset.direction) || 1;
+        carousel.scrollBy({ left: direction * Math.max(260, carousel.clientWidth * 0.78), behavior: 'smooth' });
+      });
+    });
+
+    carousel.addEventListener('scroll', updateState, { passive: true });
+    new ResizeObserver(updateState).observe(carousel);
+    new MutationObserver(updateState).observe(carousel, { childList: true });
+    updateState();
+  });
+}
+
+setupCarouselControls();
+
 // Detail Modal
 const detailOverlay = document.getElementById('detail-modal-overlay');
 const closeDetailBtn = document.getElementById('close-detail-modal');
