@@ -300,3 +300,30 @@ header .profile-button { width: 36px; height: 36px; font-size: .58rem; }
   header .brand span { display: none; }
   header .search-box { max-width: 164px; }
 }
+
+/* Full-bleed content: keep only a small intentional breathing room. */
+header,
+header.scrolled {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+main {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.section {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.hero {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .section { padding-right: .75rem; padding-left: .75rem; }
+  .hero { padding-right: 1rem; padding-left: 1rem; }
+}
