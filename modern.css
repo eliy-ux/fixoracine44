@@ -351,3 +351,7 @@ header.scrolled {
   min-height: 64px;
   padding: 15px !important;
 }
+
+.carousel-container.is-scrollable .carousel-arrow:not(:disabled) {
+  opacity: 1;
+}
