@@ -344,3 +344,10 @@ main {
   .section { padding-right: .75rem; padding-left: .75rem; }
   .hero { padding-right: 1rem; padding-left: 1rem; }
 }
+
+header,
+header.scrolled {
+  height: auto;
+  min-height: 64px;
+  padding: 15px !important;
+}
