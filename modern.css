@@ -370,3 +370,36 @@ header .nav-links a:not(.active):hover::after,
 header .nav-links a:not(.active):focus-visible::after {
   display: none !important;
 }
+
+.search-filter-bar {
+  display: flex;
+  gap: .35rem;
+  padding: .65rem .75rem .55rem;
+  border-bottom: 1px solid rgba(214, 255, 241, .1);
+}
+
+.search-filter-btn {
+  padding: .32rem .58rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(243, 255, 249, .58);
+  cursor: pointer;
+  font: inherit;
+  font-size: .64rem;
+  font-weight: 750;
+  transition: color .18s ease, background .18s ease, border-color .18s ease;
+}
+
+.search-filter-btn:hover,
+.search-filter-btn.active {
+  border-color: rgba(138, 240, 197, .28);
+  background: rgba(138, 240, 197, .12);
+  color: var(--mc-accent);
+}
+
+.search-filter-empty {
+  padding: .8rem 1rem;
+  color: rgba(243, 255, 249, .48);
+  font-size: .75rem;
+}

@@ -685,6 +685,48 @@ detailOverlay.addEventListener('click', (e) => {
    PREDICTIVE SEARCH
    ========================================================================== */
 let searchTimeout;
+let searchFilter = 'all';
+let latestSearchResults = [];
+
+function filterSearchResults(items) {
+  if (searchFilter === 'movie') return items.filter(item => item.media_type === 'movie');
+  if (searchFilter === 'tv') return items.filter(item => item.media_type === 'tv');
+  return items;
+}
+
+function renderSearchPredictions(items) {
+  const filtered = filterSearchResults(items)
+    .filter(i => i.media_type === 'movie' || i.media_type === 'tv')
+    .slice(0, 6)
+    .map(i => formatItem(i));
+
+  const filterBar = `
+    <div class="search-filter-bar" role="group" aria-label="Search result type">
+      <button type="button" class="search-filter-btn ${searchFilter === 'all' ? 'active' : ''}" onclick="setSearchFilter('all')">All</button>
+      <button type="button" class="search-filter-btn ${searchFilter === 'movie' ? 'active' : ''}" onclick="setSearchFilter('movie')">Movies</button>
+      <button type="button" class="search-filter-btn ${searchFilter === 'tv' ? 'active' : ''}" onclick="setSearchFilter('tv')">TV Shows</button>
+    </div>`;
+
+  if (filtered.length > 0) {
+    searchPredictions.innerHTML = filterBar + filtered.map(item => `
+      <div class="prediction-item" onclick="selectPrediction(${item.id})">
+        <img src="${item.poster}" class="prediction-thumb" alt="${item.title}">
+        <div class="prediction-info">
+          <span class="prediction-title">${item.title}</span>
+          <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ${iconSvg('star', 12)} ${item.rating} • ${item.quality}</span>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    searchPredictions.innerHTML = filterBar + '<div class="search-filter-empty">No results for this filter</div>';
+  }
+  searchPredictions.classList.add('active');
+}
+
+function setSearchFilter(filter) {
+  searchFilter = filter;
+  if (latestSearchResults.length > 0) renderSearchPredictions(latestSearchResults);
+}
 
 searchInput.addEventListener('input', (e) => {
   clearTimeout(searchTimeout);
@@ -699,26 +741,9 @@ searchInput.addEventListener('input', (e) => {
     try {
       const res = await fetch(`${BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`);
       const data = await res.json();
-      const results = (data.results || [])
-        .filter(i => i.media_type === 'movie' || i.media_type === 'tv')
-        .slice(0, 6)
-        .map(i => formatItem(i));
-
-      if (results.length > 0) {
-        searchPredictions.innerHTML = results.map(item => `
-          <div class="prediction-item" onclick="selectPrediction(${item.id})">
-            <img src="${item.poster}" class="prediction-thumb" alt="${item.title}">
-            <div class="prediction-info">
-              <span class="prediction-title">${item.title}</span>
-              <span class="prediction-meta">${item.year} • ${item.type.toUpperCase()} • ${iconSvg('star', 12)} ${item.rating} • ${item.quality}</span>
-            </div>
-          </div>
-        `).join('');
-        searchPredictions.classList.add('active');
-      } else {
-        searchPredictions.innerHTML = '<div style="padding: 0.8rem 1rem; color: #888; font-size: 0.85rem;">No matches found</div>';
-        searchPredictions.classList.add('active');
-      }
+      latestSearchResults = (data.results || [])
+        .filter(i => i.media_type === 'movie' || i.media_type === 'tv');
+      renderSearchPredictions(latestSearchResults);
     } catch (err) {
       console.error("Predictive Search Error:", err);
     }
@@ -730,7 +755,7 @@ searchInput.addEventListener('keydown', (e) => {
     const query = searchInput.value.trim();
     if (query) {
       searchPredictions.classList.remove('active');
-      performFullSearch(query);
+      performFullSearch(query, searchFilter);
     }
   }
 });
@@ -741,7 +766,7 @@ function selectPrediction(id) {
   openDetailModal(id);
 }
 
-async function performFullSearch(query) {
+async function performFullSearch(query, filter = searchFilter) {
   document.getElementById('section-movies').style.display = 'none';
   document.getElementById('section-tv').style.display = 'none';
   sectionContinue.style.display = 'none';
@@ -753,6 +778,7 @@ async function performFullSearch(query) {
     const data = await res.json();
     const results = (data.results || [])
       .filter(i => i.media_type === 'movie' || i.media_type === 'tv')
+      .filter(i => filter === 'all' || i.media_type === filter)
       .map(i => formatItem(i));
 
     renderCarousel(trendingCarousel, results);
