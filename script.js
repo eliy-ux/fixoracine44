@@ -733,9 +733,19 @@ searchInput.addEventListener('input', (e) => {
   const query = e.target.value.trim();
 
   if (!query) {
+    latestSearchResults = [];
     searchPredictions.classList.remove('active');
     return;
   }
+
+  searchPredictions.innerHTML = `
+    <div class="search-filter-bar" role="group" aria-label="Search result type">
+      <button type="button" class="search-filter-btn ${searchFilter === 'all' ? 'active' : ''}" onclick="setSearchFilter('all')">All</button>
+      <button type="button" class="search-filter-btn ${searchFilter === 'movie' ? 'active' : ''}" onclick="setSearchFilter('movie')">Movies</button>
+      <button type="button" class="search-filter-btn ${searchFilter === 'tv' ? 'active' : ''}" onclick="setSearchFilter('tv')">TV Shows</button>
+    </div>
+    <div class="search-filter-empty">Searching…</div>`;
+  searchPredictions.classList.add('active');
 
   searchTimeout = setTimeout(async () => {
     try {

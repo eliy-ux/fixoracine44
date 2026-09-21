@@ -350,6 +350,16 @@ header.scrolled {
   height: auto;
   min-height: 64px;
   padding: 15px !important;
+  z-index: 1000;
+}
+
+header .search-box {
+  position: relative;
+  z-index: 1001;
+}
+
+header .search-predictions {
+  z-index: 1200;
 }
 
 .carousel-container.is-scrollable .carousel-arrow:not(:disabled) {
